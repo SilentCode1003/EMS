@@ -1,0 +1,149 @@
+<script>
+    $(document).ready(function() {
+        var filename = "";
+
+
+        $("#updateArea").toggle(0, function() {
+        });
+        var dataTable = $('#equipmentTblList').DataTable({
+            'destroy': true,
+            'processing' : true,
+            'serverSide' : true,
+            'paging' : false,
+            'searching': false,
+            'info': false,
+            'scrollY': 200,
+            'scrollCollapse': true,
+            'serverMethod' : 'get',
+            'ajax' : {
+                'url' : '/equipment/loadFile'
+            },
+            'columns' : [
+                { data : 'file' }
+                
+            ]
+        });
+
+        $('#equipmentTblList tbody').on( 'click', 'tr', function () {
+                var data = dataTable.row( this ).data();
+                console.log(data.file);
+
+                var serial = data.file;
+                filename = serial;
+                reloadEquipmentTbl(serial);  
+        });
+
+        $(document).on('click', "#registerBtn", function () {
+            var serial = $('#itembarcode').val();
+            var itemname = $('#itemname').val();
+            var datereceive = $('#itemprice').val();
+            var itemtype = $('#itemtype').val();
+
+            console.log(serial +" "+ itemname +" "+ datereceive +" "+ itemtype);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/equipment/save",
+                data: {
+                    serial: serial,
+                    itemname: itemname,
+                    datereceive: datereceive,
+                    itemtype: itemtype
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: '+ result.data);
+                }
+            });
+
+            reloadDataTable();
+        });
+
+        function reloadDataTable(){
+            $('#equipmentTblList').DataTable().ajax.reload();
+        }
+
+        function reloadEquipmentTbl(file){
+            // $('#equipmentTbl').DataTable().ajax.reload();
+
+            var table = $('#equipmentTbl').DataTable({
+                    'destroy': true,
+                    'processing' : true,
+                    'serverSide' : true,
+                    'paging' : false,
+                    'searching': false,
+                    'info': false,
+                    'serverMethod' : 'post',
+                    'ajax' : {
+                        'url' : '/equipment/retrieveFile',
+                        'data': {serial: file}
+                    },
+                    'columns' : [
+                        { data : 'Serial'},
+                        { data : 'ItemName' },
+                        { data : 'DateReceive' },
+                        { data : 'ItemType' },
+                        { data : 'DeployTo' },
+                        { data  : 'DeployDate'},
+                        { data : 'Ticket' },
+                        { data : 'Personel' },
+                        { data : null, title:'Action', wrap: false, "render": function(){
+                                return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                                }}
+                    ] 
+            });
+        }
+
+        $(document).on('click', "#updateBtn", function () {
+            console.log("Selected file: " + filename);
+            var elem = document.getElementById("updateBtn");
+            console.log(elem);
+            if (elem.innerText=="UPDATE"){
+                $("#updateArea").toggle(2000, function() {
+
+                });
+                elem.innerText = "CLOSED";
+            } 
+            else if (elem.innerText=="CLOSED"){
+                $("#updateArea").toggle(2000, function() {
+
+                });
+                elem.innerText = "UPDATE";
+            } 
+            
+        });
+
+        $(document).on('click', "#saveBtn", function () {
+            var file = filename;
+            var deployto = $('#deployto').val();
+            var datedeploy = $('#datedeploy').val();
+            var ticket = $('#ticket').val();
+            var personel = $('#personel').val();
+
+            console.log(file + " " +  deployto +" "+ datedeploy +" "+ ticket +" "+ personel);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/equipment/updateFile",
+                data: {
+                    filename: file,
+                    deployto: deployto,
+                    datedeploy: datedeploy,
+                    ticket: ticket,
+                    personel: personel
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: '+ result.data);
+                }
+            });
+
+            $("#updateArea").toggle(200, function() {
+                reloadEquipmentTbl(file);
+        });
+        });
+
+    });
+</script>
