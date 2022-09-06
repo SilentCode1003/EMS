@@ -10,6 +10,8 @@ var async = require("async");
 const { create } = require('xmlbuilder2');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
+const xmlparser = require('fast-xml-parser');
+var convert = require('xml-js');
 
 
 
@@ -24,34 +26,118 @@ router.post('/save', function(req, res, next) {
   console.log('Received data');
   
   console.log(req.body);
-  //Xml Details
-  const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
-    .ele('EstablistmentInfo')
-      .ele('StoreCode').txt(req.body.storecode).up()
-      .ele('StoreName').txt(req.body.storename).up()
-      .ele('StoreAddress').txt(req.body.storeaddress).up()
-      .ele('StoreEmail').txt(req.body.storeemail).up()
-      .ele('StoreArea').txt(req.body.storearea).up()
+  //#region Establishment Info
+    //Xml Details
+    const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+      .ele('EstablistmentInfo')
+        .ele('StoreCode').txt(req.body.storecode).up()
+        .ele('StoreName').txt(req.body.storename).up()
+        .ele('StoreAddress').txt(req.body.storeaddress).up()
+        .ele('StoreEmail').txt(req.body.storeemail).up()
+        .ele('StoreArea').txt(req.body.storearea).up()
+      .up();
+      const xml = root.end({ prettyPrint: true });
+
+      console.log('Create XML');
+
+      //Write and Save xml details into XML file
+      let filename = req.body.storecode+'_'+req.body.storename+'.xml';
+      let fullFileName = __dirname + '/data/establishment/'+ filename;
+      fs.writeFileSync(fullFileName, xml, function(err) {
+      if (err) throw err;
+        res.json({
+          msg: 'error',
+          data: err
+        });
+      });
+    //#endregion
+
+    //#region Report Info
+    const rootInfo = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+    .ele('ReportInfo')
+      .ele('StoreName').txt(req.body.storecode + ' ' + req.body.storename).up()
+      .ele('First').txt().up()
+      .ele('Second').txt().up()
+      .ele('Third').txt().up()
     .up();
-    const xml = root.end({ prettyPrint: true });
+    const xmlInfo = rootInfo.end({ prettyPrint: true });
 
     console.log('Create XML');
 
     //Write and Save xml details into XML file
-    let filename = req.body.storecode+'_'+req.body.storename+'.xml';
-    let fullFileName = __dirname + '/data/establishment/'+ filename;
-    fs.writeFileSync(fullFileName, xml, function(err) {
+    let filenameInfo = req.body.storecode+'_'+req.body.storename+'_report'+'.xml';
+    let fullFileNameInfo = __dirname + '/data/reports/'+ filenameInfo;
+    fs.writeFileSync(fullFileNameInfo, xmlInfo, function(err) {
     if (err) throw err;
       res.json({
         msg: 'error',
         data: err
       });
     });
+    //#endregion
 
     res.json({
       msg:'success'
     });
     console.log('File saved!');
+});
+
+router.post('/saveEquipmentInfo', function(req, res, next) {
+  var data = req.body.data;
+  var options = {compact: true, ignoreComment: true, spaces: 4};
+  console.log(req.body.storename);
+  // var result = convert.json2xml(data, options);
+  
+  //#region Establishment Info
+    // Xml Details
+    const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+    .ele('EquipmentInfo')
+      .ele('POS1').txt().up()
+      .ele('POS1CustomerDisplay').txt().up()
+      .ele('POS1Cashdrawer').txt().up()
+      .ele('POS1Printer').txt().up()
+      .ele('POS1Scanner').txt().up()
+      .ele('POS1UPS').txt().up()
+      .ele('POS2').txt().up()
+      .ele('POS2CustomerDisplay').txt().up()
+      .ele('POS2Cashdrawer').txt().up()
+      .ele('POS2Printer').txt().up()
+      .ele('POS2Scanner').txt().up()
+      .ele('POS2UPS').txt().up()
+      .ele('Cliqq').txt().up()
+      .ele('CliqqUPS').txt().up()
+      .ele('Mikrotik').txt().up()
+      .ele('Ruijie').txt().up()
+      .ele('AP').txt().up()
+      .ele('Smart').txt().up()
+      .ele('Globe').txt().up()
+      .ele('DCTECH').txt().up()
+      .ele('SIMSmart').txt().up()
+      .ele('SIMGlobe').txt().up()
+      .ele('ZEBRAHT').txt().up()
+      .ele('ZEBRACRADLE').txt().up()
+    .up()
+    const xml = root.end({ prettyPrint: true });
+
+  console.log(xml);
+
+  // Write and Save xml details into XML file
+  let filename = req.body.storename + '.xml';
+  let fullFileName = __dirname + '/data/storeinfo/'+ filename;
+  fs.writeFileSync(fullFileName, xml, function(err) {
+  if (err) throw err;
+    res.json({
+      msg: 'error',
+      data: err
+    });
+  });
+  //#endregion
+
+  res.json({
+    msg:'success'
+  });
+
+  console.log('File saved!');
 });
 
 let data_arr = [];
@@ -116,3 +202,31 @@ router.get('/loadFile', function(req, res, next) {
 
   data_arr = [];
 });
+
+
+class EqipmentInfo{
+  constructor(){
+
+  }
+
+  set ItemAllocation(itemallocation){
+    this.itemallocation = itemallocation;
+  }
+  get ItemAllocation(){
+    return this._itemallocation;
+  }
+
+  set ItemName(itemname){
+    this.itemname = itemname;
+  }
+  get ItemName(){
+    return this._itemname;
+  }
+
+  set ItemSerial(itemserial){
+    this.itemserial = itemserial;
+  }
+  get ItemSerial(){
+    return this._itemserial;
+  }
+}

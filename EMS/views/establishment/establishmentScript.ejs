@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
-
-        reloadStoreInfoTbl();
+        let selectedStore = "";
+        let dataArr = [];
 
         $(document).on('click', "#registerBtn", function () {
             var storecode = $('#storecode').val();
@@ -30,17 +30,34 @@
             });
         });
     
-        function reloadStoreInfoTbl(){
-            // $('#equipmentTbl').DataTable().ajax.reload();
+        $(document).on('click', "#saveEquipmentBtn", function () {
+            var data = JSON.stringify(dataArr);
 
-            var table = $('#storeInfoTbl').DataTable({
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/establishment/saveEquipmentInfo",
+                data: {
+                    storename : selectedStore,
+                    data: data
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: '+ result.data);
+                }
+            });
+        });
+
+        var dataTable = $('#storeInfoTbl').DataTable({
                     'destroy': true,
                     'processing' : true,
                     'serverSide' : true,
                     'paging' : false,
                     'searching': false,
                     'info': false,
-                    'scrollY': 300,
+                    'scrollY': 200,
                     'scrollCollapse': true,
                     'serverMethod' : 'get',
                     'ajax' : {
@@ -57,7 +74,43 @@
                         //         }}
                     ] 
             });
-        }
-    
+        
+        
+        $(document).on('click', "#addEquipmentBtn", function () {
+            var storeallocation = $('#itemallocation').val();
+            var itemname = $('#itemname').val();
+            var itemserial = $('#itemserial').val();
+
+            dataArr.push({
+                'itemallocation':storeallocation,
+                'itemname': itemname,
+                'itemserial': itemserial
+            });
+
+            var table = document.getElementById("equipmentInfo");
+            var row = table.insertRow(1);
+            var ItemAllocation = row.insertCell(0);
+            var ItemName = row.insertCell(1);
+            var ItemSerial = row.insertCell(2);
+
+            ItemAllocation.innerHTML = storeallocation;
+            ItemName.innerHTML = itemname;
+            ItemSerial.innerHTML = itemserial;
+        });
+
+        $('#storeInfoTbl tbody').on( 'click', 'tr', function () {
+        var data = dataTable.row( this ).data();
+        console.log(data);
+
+        var storecode = data.StoreCode;
+        var storename = data.StoreName;
+
+        selectedStore = storecode +' '+ storename;
+
+        document.getElementById('storeSelected').textContent = selectedStore;
+        console.log(selectedStore);
+        });
     });
+
+  
 </script>

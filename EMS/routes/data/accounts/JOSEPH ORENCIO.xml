@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ItemEquipment>
-  <Serial values="JOSEPH">
-    <ItemName>ORENCIO</ItemName>
-    <DateReceive>JOSEPH ORENCIO</DateReceive>
-    <ItemType>ADMIN</ItemType>
-  </Serial>
-</ItemEquipment>
+<AccountInfo>
+  <Username>admin1003</Username>
+  <Password>P@ssword</Password>
+  <Fullname>Joseph Orencio</Fullname>
+  <AccountType>Administrator</AccountType>
+</AccountInfo>

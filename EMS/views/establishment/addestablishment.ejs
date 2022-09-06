@@ -1,35 +1,100 @@
 <div class="row">
-    <div class="report-area">
-        <div class="report-entry">
-                <label class="register-label" for="price">STORE NO: </label>
-                <input class="register-info" type="text" id="storecode" name="itembarcode">
+    <div class="col-xl-6">
+        <div class="input-area">
+            <form>
+                <fieldset>  
+                    <legend class="info black-txt">STORE INFO</legend>
+                    <div class="report-entry">
+                            <label class="register-label" for="price">STORE NO: </label>
+                            <input class="register-address" type="text" id="storecode" name="itembarcode">
+                    </div>
+                    <div class="report-entry">
+                            <label class="register-label" for="price">STORE NAME: </label>
+                            <input class="register-address" type="text" id="storename" name="itembarcode">
+                    </div>
+                    <div class="report-entry">
+                            <label class="register-label" for="price">STORE ADDRESS: </label>
+                            <input class="register-address" type="text" id="storeaddress" name="itembarcode">
+                    </div>
+                    <div class="report-entry">
+                            <label class="register-label" for="price">STORE EMAIL: </label>
+                            <input class="register-address" type="text" id="storeemail" name="itembarcode">
+                    </div>
+                    <div class="report-entry">
+                            <label class="register-label" for="price">STORE AREA: </label>
+                            <input class="register-address" type="text" id="storearea" name="itembarcode">
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn-right btn-glow" id="registerBtn" name="registerBtn">REGISTER</button>
+                    </div>
+                </fieldset>
+            </form>
+            
         </div>
-        <div class="report-entry">
-                <label class="register-label" for="price">STORE NAME: </label>
-                <input class="register-info" type="text" id="storename" name="itembarcode">
-        </div>
-        <div class="report-entry">
-                <label class="register-label" for="price">STORE ADDRESS: </label>
-                <input class="register-info" type="text" id="storeaddress" name="itembarcode">
-        </div>
-        <div class="report-entry">
-                <label class="register-label" for="price">STORE EMAIL: </label>
-                <input class="register-info" type="text" id="storeemail" name="itembarcode">
-        </div>
-        <div class="report-entry">
-                <label class="register-label" for="price">STORE AREA: </label>
-                <input class="register-info" type="text" id="storearea" name="itembarcode">
-        </div>
-        <br>
-        <div>
-            <button class="update-btn btn-glow" id="registerBtn" name="registerBtn">REGISTER</button>
-        </div>
+    </div>
 
+    <div class="col-xl-6">
+        <div class="input-area">
+            <fieldset>  
+                <legend class="info black-txt">EQUPMENT INFO<h1 id="storeSelected">SELECT STORE</h1></legend>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM ALLOCATION: </label>
+                        <input class="register-info" type="text" id="itemallocation" name="itemallocation">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM NAME: </label>
+                        <input class="register-info" type="text" id="itemname" name="itemname">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM SERIAL: </label>
+                        <input class="register-info" type="text" id="itemserial" name="itemserial">
+                </div>
+                <br>
+                <div>
+                    <button class="btn-right btn-glow" id="addEquipmentBtn" name="addEquipmentBtn">ADD TO LIST</button>
+                </div>
+                           
+            </fieldset>
+        </div>
     </div>
 </div>
+<br>
+<div class="row">
+        <div class="col-xl-4">
+        </div>
+        <div class="col-xl-2">
+        </div>
+        <div id="table-wrapper" class="col-xl-6 input-area">
+            <div id="table-scroll">
+                <table id="equipmentInfo">
+                        <thead>
+                            <th class="th-files">ITEM ALLOCATION</th>
+                            <th class="th-files">ITEM NAME</th>
+                            <th class="th-files">ITEM SERIAL</th>
+                        </thead>
+                        <tbody>
+                                <!-- <tr>
+                                    <td>2330</td>
+                                    <td>MEDELLIN</td>
+                                    <td>POBLACION MEDELLIN CEBU</td>
+                                    <td>st2330@store.philseven.com</td>
+                                    <td>CEBU</td>
+                                </tr> -->
+                        </tbody>
+            
+                    </table>
+            </div>
+            <br>
+            <div>
+                <button class="btn-right btn-glow" id="saveEquipmentBtn" name="saveEquipmentBtn">SAVE</button>
+            </div>
+        </div>
 
+</div>
+
+<br>
 <hr class="custom-hr">
-
 <div>
     <table id="storeInfoTbl">
         <thead>

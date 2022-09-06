@@ -24,11 +24,11 @@ router.post('/save', function(req, res, next) {
 
   //Xml Details
   const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })                        
-    .ele('ItemEquipment')                        
-    .ele('Serial',{values: username})
-        .ele('ItemName').txt(password).up()                        
-        .ele('DateReceive').txt(fullname).up()
-        .ele('ItemType').txt(accounttype).up()                                    
+    .ele('AccountInfo')                        
+      .ele('Username').txt(username).up()
+      .ele('Password').txt(password).up()                       
+      .ele('Fullname').txt(fullname).up()
+      .ele('AccountType').txt(accounttype).up()                                    
     .up();                    
     const xml = root.end({ prettyPrint: true });
     console.log(xml);
