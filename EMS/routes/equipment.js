@@ -118,6 +118,7 @@ router.get('/loadFile',function(req, res, next){
         data: err
       });
     }
+    
     files.forEach(file => {
         data_arr.push({
           'file': file

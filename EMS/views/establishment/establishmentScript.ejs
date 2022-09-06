@@ -1,0 +1,63 @@
+<script>
+    $(document).ready(function() {
+
+        reloadStoreInfoTbl();
+
+        $(document).on('click', "#registerBtn", function () {
+            var storecode = $('#storecode').val();
+            var storename = $('#storename').val();
+            var storeaddress = $('#storeaddress').val();
+            var storeemail = $('#storeemail').val();
+            var storearea = $('#storearea').val();
+
+            console.log(storecode +" "+ storename +" "+ storeaddress +" "+ storeemail +" "+ storearea);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/establishment/save",
+                data: {
+                    storecode: storecode,
+                    storename: storename,
+                    storeaddress: storeaddress,
+                    storeemail: storeemail,
+                    storearea: storearea
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: '+ result.data);
+                }
+            });
+        });
+    
+        function reloadStoreInfoTbl(){
+            // $('#equipmentTbl').DataTable().ajax.reload();
+
+            var table = $('#storeInfoTbl').DataTable({
+                    'destroy': true,
+                    'processing' : true,
+                    'serverSide' : true,
+                    'paging' : false,
+                    'searching': false,
+                    'info': false,
+                    'scrollY': 300,
+                    'scrollCollapse': true,
+                    'serverMethod' : 'get',
+                    'ajax' : {
+                        'url' : '/establishment/loadFile',
+                    },
+                    'columns' : [
+                        { data : 'StoreCode'},
+                        { data : 'StoreName' },
+                        { data : 'StoreAddress' },
+                        { data : 'StoreEmail' },
+                        { data : 'StoreArea' }
+                        // { data : null, title:'Action', wrap: false, "render": function(){
+                        //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                        //         }}
+                    ] 
+            });
+        }
+    
+    });
+</script>
