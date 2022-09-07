@@ -2,6 +2,7 @@ const fs = require('fs');
 var express = require('express');
 var router = express.Router();
 // var List = require("collections/list");
+var x2js = require('x2js');
 
 var path = require('path');
 
@@ -24,7 +25,7 @@ module.exports = router;
 
 router.post('/save', function(req, res, next) {
   console.log('Received data');
-  
+
   console.log(req.body);
   //#region Establishment Info
     //Xml Details
@@ -83,51 +84,15 @@ router.post('/save', function(req, res, next) {
 });
 
 router.post('/saveEquipmentInfo', function(req, res, next) {
+
   var data = req.body.data;
-  var options = {compact: true, ignoreComment: true, spaces: 4};
-  console.log(req.body.storename);
-  // var result = convert.json2xml(data, options);
-  
   //#region Establishment Info
-    // Xml Details
-    const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
-    .ele('EquipmentInfo')
-      .ele('POS1').txt().up()
-      .ele('POS1CustomerDisplay').txt().up()
-      .ele('POS1Cashdrawer').txt().up()
-      .ele('POS1Printer').txt().up()
-      .ele('POS1Scanner').txt().up()
-      .ele('POS1UPS').txt().up()
-      .ele('POS2').txt().up()
-      .ele('POS2CustomerDisplay').txt().up()
-      .ele('POS2Cashdrawer').txt().up()
-      .ele('POS2Printer').txt().up()
-      .ele('POS2Scanner').txt().up()
-      .ele('POS2UPS').txt().up()
-      .ele('Cliqq').txt().up()
-      .ele('CliqqUPS').txt().up()
-      .ele('Mikrotik').txt().up()
-      .ele('Ruijie').txt().up()
-      .ele('AP').txt().up()
-      .ele('Smart').txt().up()
-      .ele('Globe').txt().up()
-      .ele('DCTECH').txt().up()
-      .ele('SIMSmart').txt().up()
-      .ele('SIMGlobe').txt().up()
-      .ele('ZEBRAHT').txt().up()
-      .ele('ZEBRACRADLE').txt().up()
-    .up()
-    const xml = root.end({ prettyPrint: true });
-
-  console.log(xml);
-
-  // Write and Save xml details into XML file
-  let filename = req.body.storename + '.xml';
-  let fullFileName = __dirname + '/data/storeinfo/'+ filename;
-  fs.writeFileSync(fullFileName, xml, function(err) {
+  let filenameFinal = req.body.storename + '.json';
+  let fullFileNameFinal = __dirname + '/data/storeinfo/'+ filenameFinal;
+  fs.writeFileSync(fullFileNameFinal, data, function(err) {
   if (err) throw err;
     res.json({
-      msg: 'error',
+      msg: 'writeFileSync error',
       data: err
     });
   });
@@ -142,8 +107,9 @@ router.post('/saveEquipmentInfo', function(req, res, next) {
 
 let data_arr = [];
 router.get('/loadFile', function(req, res, next) {
-  
+
   output(__dirname + '/data/establishment');
+
   async function getData(fullpath){
     return new Promise(resolve => {
         resolve(
@@ -155,9 +121,9 @@ router.get('/loadFile', function(req, res, next) {
               });
             }
 
-            
+
             files.forEach(file => {
-                xmlFileToJs(file, 
+                xmlFileToJs(file,
                   (err, obj) => {
                   if (err){
                     res.json({
@@ -166,7 +132,7 @@ router.get('/loadFile', function(req, res, next) {
                     });
                   }
                   var data = obj['EstablistmentInfo'];
-                  
+
                     data_arr.push({
                       'StoreCode': data['StoreCode'],
                       'StoreName': data['StoreName'],
@@ -174,7 +140,7 @@ router.get('/loadFile', function(req, res, next) {
                       'StoreEmail': data['StoreEmail'],
                       'StoreArea': data['StoreArea']
                     });
-                }); 
+                });
             });
 
           })
