@@ -1,5 +1,7 @@
 <script>
+let storename="";
  $(document).ready(function() {
+     
 
     $(document).on('click', "#registerBtn", function () {
         var storecode = $('#storecode').val();
@@ -58,13 +60,48 @@
         var data = dataTable.row( this ).data();
         console.log(data);
 
-        var storename = data.StoreName
+        storename = data.StoreName
 
         var elem = document.getElementById("storename");
         $('#storename').val(storename);
 
+        retriedData();
+
         console.log(storename);
     });
+
+    function retriedData(){
+        var filename = $("#storename").val();
+        console.log(filename);
+            // $('#equipmentTbl').DataTable().ajax.reload();
+
+            var table = $('#storeEquipmentInfoTbl').DataTable({
+                'destroy': true,
+                    'processing' : true,
+                    'serverSide' : true,
+                    'paging' : false,
+                    'searching': false,
+                    'info': false,
+                    'scrollY': 300,
+                    'scrollCollapse': true,
+                    'serverMethod' : 'post',
+                    'ajax' : {
+                        'url' : '/reports/retrieveFile',
+                        'data': {
+                            filename: filename
+                        }
+                    },
+                    'columns' : [
+                        { data : 'itemallocation'},
+                        { data : 'itemname' },
+                        { data : 'itemserial' }
+                        // { data : null, title:'Action', wrap: false, "render": function(){
+                        //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                        //         }}
+                    ] 
+            });
+        }
+
 });
 
 </script>

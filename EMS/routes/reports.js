@@ -80,3 +80,26 @@ router.get('/loadFile', function(req, res, next) {
 
   data_arr = [];
 });
+
+router.post('/retrieveFile', function(req, res, next) {
+  var file = req.body.filename;
+  console.log(file)
+
+  var filepath = path.normalize(path.join(__dirname + '/data/storeinfo/', file + '.json'));
+  fs.readFile(filepath, 'utf8', function (err, jsStr) {
+    if (err){
+      res.json({
+        msg:'error',
+        data: err
+      })
+    }
+
+    var data = JSON.parse(jsStr)
+    console.log(data);
+    res.json({
+      msg:'success',
+      data: data
+    })
+
+  });
+});
