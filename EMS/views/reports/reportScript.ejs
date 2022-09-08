@@ -75,15 +75,15 @@ let storename="";
         console.log(filename);
             // $('#equipmentTbl').DataTable().ajax.reload();
 
-            var table = $('#storeEquipmentInfoTbl').DataTable({
+            var table = $('#equipmentInfo').DataTable({
                 'destroy': true,
                     'processing' : true,
                     'serverSide' : true,
                     'paging' : false,
                     'searching': false,
                     'info': false,
-                    'scrollY': 300,
-                    'scrollCollapse': true,
+                    'scrollY': 380,
+                    'scrollCollapse': false,
                     'serverMethod' : 'post',
                     'ajax' : {
                         'url' : '/reports/retrieveFile',

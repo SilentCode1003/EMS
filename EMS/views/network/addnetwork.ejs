@@ -1,0 +1,86 @@
+<div>
+    <div class="col-xl-4">
+        <div class="input-area">
+            <fieldset>  
+                <legend class="info black-txt">NETWORK DEVICE INFORMATION</legend>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM NAME: </label>
+                        <input class="register-info" type="text" id="itemname" name="itemname">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM SERIAL: </label>
+                        <input class="register-info" type="text" id="itemserial" name="itemserial">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">DATE RECEIVED: </label>
+                        <input class="register-info" type="text" id="datereceived" name="datereceived">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">RECEIVED BY: </label>
+                        <input class="register-info" type="text" id="receivedby" name="receivedby">
+                </div>
+                <br>
+                <div>
+                    <button class="btn-right btn-glow" id="registerNetworkDeviceBtn" name="registerNetworkDeviceBtn">REGISTER</button>
+                </div>            
+            </fieldset>
+        </div>
+    </div>
+</div>
+<hr class="custom-hr">
+<div class="row">
+    <div id="table-wrapper" class="col-xl-12 col-lg-6">
+        <div id="table-scroll">
+                <table id="networkDeviceTbl">
+                    <thead>
+                        <th>ITEM NAME</th>
+                        <th>ITEM SERIAL</th>
+                        <th>DATE RECEIVED</th>
+                        <th>RECEIVED BY</th>
+                        <th>DEPLOY TO</th>
+                        <th>DATE DEPLOY</th>
+                        <th>DEPLOY BY</th>
+                        <th>TICKET</th>
+                        <!-- <th>ACTION</th> -->
+                    </thead>
+                    <tbody></tbody>
+                </table>
+        </div>      
+    </div>   
+</div>
+<br>
+<div class="row">
+        <div id='updateArea' class="col-xl-6 col-lg-5">
+            <div class="row">
+                <div class="col-xl-9">
+                        <div class="input-area">
+                            <fieldset>  
+                                <legend class="info black-txt">UPDATE INFO <h3 id="networkSelected">DEVICE SERIAL</h3></legend>
+                                <div class="report-entry">
+                                    <label class="register-label" for="price">DEPLOY TO</label>
+                                    <input class="register-info" type="text" id="deployto" name="deployto">
+                                </div>
+                                <div class="report-entry">
+                                    <label class="register-label" for="price">DATE DEPLOY</label>
+                                    <input class="register-info" type="text" id="datedeploy" name="datedeploy">
+                                </div>
+                                <div class="report-entry">
+                                    <label class="register-label" for="price">TICKET</label>
+                                    <input class="register-info" type="text" id="ticket" name="ticket">
+                                </div>
+                                <div class="report-entry">
+                                    <label class="register-label" for="price">PERSONEL</label>
+                                    <input class="register-info" type="text" id="personel" name="personel">
+                                </div>
+                                <br>
+                                <div>
+                                    <button class="addbtn btn-glow" id="saveBtn" name="saveBtn">SUBMIT</button>
+                                </div>
+                            </fieldset>
+                            
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>

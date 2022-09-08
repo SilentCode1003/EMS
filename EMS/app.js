@@ -11,6 +11,7 @@ var accountsRouter = require('./routes/accounts');
 var equipmentRouter = require('./routes/equipment');
 var reportRouter = require('./routes/reports');
 var establishmentRouter = require('./routes/establishment');
+var networksRouter = require('./routes/networks');
 
 
 
@@ -33,6 +34,7 @@ app.use('/accounts', accountsRouter);
 app.use('/equipment', equipmentRouter);
 app.use('/reports', reportRouter);
 app.use('/establishment', establishmentRouter);
+app.use('/networks', networksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
