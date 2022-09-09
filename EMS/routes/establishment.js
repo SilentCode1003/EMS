@@ -26,6 +26,8 @@ module.exports = router;
 router.post('/save', function(req, res, next) {
   console.log('Received data');
 
+  var store = req.body.storecode+'_'+req.body.storename;
+
   console.log(req.body);
   //#region Establishment Info
     //Xml Details
@@ -56,7 +58,7 @@ router.post('/save', function(req, res, next) {
     //#region Report Info
     const rootInfo = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
     .ele('ReportInfo')
-      .ele('StoreName').txt(req.body.storecode + ' ' + req.body.storename).up()
+      .ele('StoreName').txt(store).up()
       .ele('First').txt().up()
       .ele('Second').txt().up()
       .ele('Third').txt().up()
@@ -66,7 +68,7 @@ router.post('/save', function(req, res, next) {
     console.log('Create XML');
 
     //Write and Save xml details into XML file
-    let filenameInfo = req.body.storecode+'_'+req.body.storename+'_report'+'.xml';
+    let filenameInfo = req.body.storecode + '_' + req.body.storename+'_report'+'.xml';
     let fullFileNameInfo = __dirname + '/data/reports/'+ filenameInfo;
     fs.writeFileSync(fullFileNameInfo, xmlInfo, function(err) {
     if (err) throw err;

@@ -103,3 +103,85 @@ router.post('/retrieveFile', function(req, res, next) {
 
   });
 });
+
+router.post('/save', function(req, res, next) {
+  var file = req.body.filename;
+  var storename = req.body.storename;
+  var assignto = req.body.assignto;
+  var dateperform = req.body.dateperform;
+  var quarter = req.body.quarter;
+
+  console.log(file);
+
+  xmlFileToJs(file, (err, obj) => {
+    if (err){
+      res.json({
+        msg: 'error',
+        data: err
+      });
+    }
+    var data = obj['ReportInfo'];
+      //#region XML file update
+
+      //PM QUARTER REPORT XML
+      const rootInfo = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+      .ele('ReportInfo')
+        .ele('StoreName').txt(req.body.storename).up()
+        .ele('First').txt(quarter == 'First' ? dateperform : data['First']).up()
+        .ele('Second').txt(quarter == 'Second' ? dateperform : data['Second']).up()
+        .ele('Third').txt(quarter == 'Third' ? dateperform : data['Third']).up()
+      .up();
+      const xmlInfo = rootInfo.end({ prettyPrint: true });
+
+      console.log('Create XML \n' + xmlInfo);
+
+      //Write and Save xml details into XML file
+      let filenameInfo = file;
+      let fullFileNameInfo = __dirname + '/data/reports/'+ filenameInfo;
+      fs.writeFileSync(fullFileNameInfo, xmlInfo, function(err) {
+      if (err) throw err;
+        res.json({
+          msg: 'error',
+          data: err
+        });
+      });
+
+      //PM QUARTER REPORT XML
+      const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+      .ele('PMReportLog')
+        .ele('StoreName').txt(req.body.storename).up()
+        .ele('AssignTo').txt(assignto).up()
+        .ele('DatePerform').txt(dateperform).up()
+        .ele('Quarter').txt(quarter).up()
+      .up();
+      const xml = root.end({ prettyPrint: true });
+
+      console.log('Create XML \n' + xml);
+
+      //Write and Save xml details into XML file
+      let filenameLog = storename + '_' + assignto + '_' + dateperform+ '.xml';
+      let fullFileNameLog = __dirname + '/data/pmreportlog/'+ filenameLog;
+      fs.writeFileSync(fullFileNameLog, xml, function(err) {
+      if (err) throw err;
+        res.json({
+          msg: 'error',
+          data: err
+        });
+      });
+      //#endregion
+      
+      res.json({
+        msg: 'success'
+      })
+    });
+
+
+  //xmlFileToJs function
+  function xmlFileToJs(filename, cb) {
+    var filepath = path.normalize(path.join(__dirname + '/data/reports/', filename));
+    fs.readFile(filepath, 'utf8', function (err, xmlStr) {
+        if (err) throw (err);
+        xml2js.parseString(xmlStr, {}, cb);
+    });
+  }
+});
