@@ -1,0 +1,35 @@
+<script>
+        $(document).ready(function() {
+
+            $(document).on('click', "#addEquipmentBtn", function () {
+            var fromstore = $('#fromstore').val();
+            var itemname = $('#itemname').val();
+            var itemserial = $('#itemserial').val();
+            var datepullout = $('#datepullout').val();
+            var pulloutby = $('#pulloutby').val();
+            var ticket = $('#ticket').val();
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/EquipmentPullout/save",
+                data: {
+                    fromstore: fromstore,
+                    itemname: itemname,
+                    itemserial: itemserial,
+                    datepullout: datepullout,
+                    pulloutby: pulloutby,
+                    ticket: ticket
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: '+ result.data);
+                }
+            });
+        });
+
+
+
+    });
+</script>

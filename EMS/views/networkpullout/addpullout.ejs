@@ -1,0 +1,58 @@
+<div class="row">
+        <div class="input-area col-xl-4">
+            <fieldset>  
+                <legend class="info black-txt">PULLOUT EQUPMENT INFO</legend>
+                <div class="report-entry">
+                        <label class="register-label" for="price">FROM STORE: </label>
+                        <input class="register-info" type="text" id="fromstore" name="fromstore">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM NAME: </label>
+                        <input class="register-info" type="text" id="itemname" name="itemname">
+                </div>
+                <div class="report-entry">
+                        <label class="register-label" for="price">ITEM SERIAL: </label>
+                        <input class="register-info" type="text" id="itemserial" name="itemserial">
+                </div>
+                <div class="report-entry">
+                    <label class="register-label" for="price">DATE PULLOUT: </label>
+                    <input class="register-info" type="text" id="datepullout" name="datepullout">
+                </div>
+                <div class="report-entry">
+                    <label class="register-label" for="price">PULLOUT BY: </label>
+                    <input class="register-info" type="text" id="pulloutby" name="pulloutby">
+                </div>
+                <div class="report-entry">
+                    <label class="register-label" for="price">TICKET: </label>
+                    <input class="register-info" type="text" id="ticket" name="ticket">
+                </div>
+                <br>
+                <div>
+                    <button class="btn-right btn-glow" id="addEquipmentBtn" name="addEquipmentBtn">ADD TO LIST</button>
+                </div>     
+            </fieldset>
+        </div>
+    </div>
+    <hr class="custom-hr">
+    <br>
+    <div class="row">
+        <div class="input-area col-xl-4">
+            <button class="info btn-glow" id="generateReportBtn" name="generateReportBtn">GENERATE REPORT</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="input-area col-xl-12">
+           <table id="networkDeviceTbl">
+               <thead>
+                   <th>TICKET</th>
+                   <th>FROM STORE</th>
+                   <th>ITEM NAME</th>
+                   <th>ITEM SERIAL</th>
+                   <th>PULLOUT BY</th>
+                   <th>PULLOUT DATE</th>
+               </thead>
+               <tbody></tbody>
+           </table>
+        </div>
+    </div>
