@@ -124,6 +124,32 @@ th{
   box-shadow: 0 5px 15px rgb(6, 39, 38);
   background: rgb(134, 162, 240);;
 }
+
+.btn-glow-modal:hover{
+  color: white;
+  box-shadow: 1px 15px 15px #df6c6c;
+  background: #b33636;;
+}
+
+.btn-glow-modal{
+  color: black;
+  background: #b33636;
+  height: auto;
+  width: auto;
+}
+
+#modal-button-container button{
+  align-items: center;
+  border-radius: 4px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: normal;
+}
+.modal-button-container{
+  background: white;
+  color: black;
+}
 .report-area{
   background: rgb(57, 96, 204);
   height: 240px ;
@@ -331,6 +357,32 @@ th{
     color: white;
   }
 
+  /* MODAL */
+
+  #modalNetworkDeviceTbl {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #modalNetworkDeviceTbl td, #modalNetworkDeviceTbl th {
+    border: 2px solid #b33636;
+    padding: 8px;
+  }
+
+  #modalNetworkDeviceTbl tr:nth-child(even){background-color: #f2f2f2;}
+
+  #modalNetworkDeviceTbl tr:hover {background-color: rgb(125, 240, 240);}
+
+  #modalNetworkDeviceTbl th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #ff4d4d;
+    color: white;
+    border: 2px solid #b33636;
+  }
+
 /* TABLE */
 
 .search-btn{
@@ -402,5 +454,238 @@ td#equipmentInfo , th#equipmentInfo  {
 #table-wrapper table{
   background:white;
   color:black;
+}
+
+#table-wrapper-modal {
+  position:relative;
+}
+
+#table-wrapper-modal table {
+  width:100%;
+}
+
+#table-wrapper-modal table{
+  background:white;
+  color:black;
+}
+
+/* MODAL STYLING */
+/* The Close Button */
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  
+}
+
+.close:hover,
+.close:focus {
+  color: #ff4d4d;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  height: 10em;
+  position: relative;
+  background-color: white;
+  color: #ff4d4d;
+  /* align-content: center; */
+}
+
+.modal-header p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+.modal-header-address {
+  /* padding: 2px 16px; */
+  height: 2em;
+  position: relative;
+  background-color: white;
+  color: #3655b3;
+  /* align-content: center; */
+}
+
+.modal-header-address p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+.modal-header-contact {
+  /* padding: 2px 16px; */
+  height: 3em;
+  position: relative;
+  background-color: white;
+  color: #3655b3;
+  /* align-content: center; */
+}
+
+.modal-header-contact p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+.modal-footer p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+.modal-body{
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+}
+.modal-footer {
+  /* padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white; */
+
+  height: 3em;
+  position: relative;
+  background-color: white;
+  color: #ff4d4d;
+}
+
+.modal-buttons {
+  height: 3em;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  color: #ff4d4d;
+}
+
+.modal-footer-address {
+  /* padding: 2px 16px; */
+  height: 1em;
+  position: relative;
+  background-color: white;
+  color: #3655b3;
+  /* align-content: center; */
+}
+
+.modal-footer-address p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+.modal-footer-contact {
+  /* padding: 2px 16px; */
+  height: 2em;
+  position: relative;
+  background-color: white;
+  color: #3655b3;
+  /* align-content: center; */
+}
+
+.modal-footer-contact p{
+  margin: 0;
+  background: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+/* TEXT STYLING */
+.report-header{
+  font-family: "Times New Roman", Times, serif; 
+  font-size: 36px;
+}
+
+.report-subheader{
+  font-size: 24px; 
+  font-family: "Times New Roman", Times, serif;
+}
+
+.report-footer{
+  font-family: "Times New Roman", Times, serif; 
+  font-size: 16px;
+}
+
+.report-footer-subheader{
+  font-family: "Times New Roman", Times, serif; 
+  font-size: 16px;
+}
+
+/* IMAGE STYLING */
+.modal-header img{
+  border: solid #b33636;
+  height: 9em;
+  width: inherit;
+  border-radius: .5em;
 }
 </style>  
