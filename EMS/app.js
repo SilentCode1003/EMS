@@ -16,6 +16,7 @@ var networksRouter = require('./routes/networks');
 var EquipmentPulloutRouter = require('./routes/EquipmentPullout');
 var NetworksPulloutRouter = require('./routes/NetworksPullout');
 var m2cashequipmentRouter = require('./routes/m2cashequipment');
+var m2cashservicereportRouter = require('./routes/servicereport');
 
 
 
@@ -42,6 +43,7 @@ app.use('/networks', networksRouter);
 app.use('/EquipmentPullout', EquipmentPulloutRouter);
 app.use('/NetworksPullout', NetworksPulloutRouter);
 app.use('/m2cashequipment', m2cashequipmentRouter)
+app.use('/servicereport', m2cashservicereportRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
