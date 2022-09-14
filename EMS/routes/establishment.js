@@ -78,11 +78,11 @@ router.post('/save', function(req, res, next) {
       });
     });
     //#endregion
-
+    console.log('File saved!');
     res.json({
       msg:'success'
     });
-    console.log('File saved!');
+    
 });
 
 router.post('/saveEquipmentInfo', function(req, res, next) {

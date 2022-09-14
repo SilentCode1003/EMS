@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<M2CashDeviceInfo>
+  <StoreName>GV BOTICA</StoreName>
+  <Address>RPH PHAMACEUTICAL DISTRIBUTOR</Address>
+  <Area>LEYTE</Area>
+  <DeviceNumber>52</DeviceNumber>
+  <PortType>USB</PortType>
+  <DeviceAdaptor>YES</DeviceAdaptor>
+  <CableType>USB</CableType>
+  <Modem>SMART HOME WIFI</Modem>
+  <ModemSerial>R051211123028409</ModemSerial>
+  <SIMCard>9644454350</SIMCard>
+  <ModemAdaptor>YES</ModemAdaptor>
+  <PatchCable>YES</PatchCable>
+  <DateDeploy/>
+  <Personel/>
+  <Status>ONHAND</Status>
+</M2CashDeviceInfo>

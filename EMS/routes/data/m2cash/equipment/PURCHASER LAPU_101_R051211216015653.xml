@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<M2CashDeviceInfo>
+  <StoreName>PURCHASER LAPU</StoreName>
+  <Address>RPH PHAMACEUTICAL DISTRIBUTOR</Address>
+  <Area>CEBU</Area>
+  <DeviceNumber>101</DeviceNumber>
+  <PortType>USB</PortType>
+  <DeviceAdaptor>YES</DeviceAdaptor>
+  <CableType>USB</CableType>
+  <Modem>SMART HOME WIFI</Modem>
+  <ModemSerial>R051211216015653</ModemSerial>
+  <SIMCard>9644468833</SIMCard>
+  <ModemAdaptor>YES</ModemAdaptor>
+  <PatchCable>YES</PatchCable>
+  <DateDeploy/>
+  <Personel/>
+  <Status>ONHAND</Status>
+</M2CashDeviceInfo>

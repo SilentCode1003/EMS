@@ -1,0 +1,82 @@
+<script>
+$(document).ready(function() {
+
+    var dataTable = $('#equipmentInfo').DataTable({
+        'destroy': true,
+        'processing' : true,
+        'serverSide' : true,
+        'paging' : false,
+        'searching': false,
+        'info': false,
+        'scrollY': 200,
+        'scrollCollapse': true,
+        'serverMethod' : 'GET',
+        'ajax' : {
+            'url' : '/m2cashequipment/LodaData',
+        },
+        'columns' : [
+            { data : 'StoreName'},
+            { data : 'Address' },
+            { data : 'Area' },
+            { data : 'DeviceNumber' },
+            { data : 'PortType' },
+            { data : 'DeviceAdaptor' },
+            { data : 'CableType' },
+            { data : 'Modem' },
+            { data : 'ModemSerial' },
+            { data : 'SIMCard' },
+            { data : 'ModemAdaptor' },
+            { data : 'PatchCable' },
+            { data : 'DateDeploy' },
+            { data : 'Personel' },
+            { data : 'Status' }
+            // { data : null, title:'Action', wrap: false, "render": function(){
+            //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+            //         }}
+        ] 
+    });
+
+    $(document).on('click', "#registerBtn", function () {
+        var storename = $('#storename').val();
+        var address = $('#address').val();
+        var area = $('#area').val();
+        var devicenum = $('#devicenum').val();
+        var porttype = $('#porttype').val();
+        var deviceadaptor = $('#deviceadaptor').val();
+        var cabletype = $('#cabletype').val();
+        var modem = $('#modem').val();
+        var modemserial = $('#modemserial').val();
+        var simcard = $('#SIMcard').val();
+        var modemadaptor = $('#modemadaptor').val();
+        var patchcable = $('#patchcable').val();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/m2cashequipment/save",
+            data: {
+                storename: storename,
+                address: address,
+                area: area,
+                devicenum: devicenum,
+                porttype: porttype,
+                deviceadaptor: deviceadaptor,
+                cabletype: cabletype,
+                modem: modem,
+                modemserial: modemserial,
+                simcard: simcard,
+                modemadaptor: modemadaptor,
+                patchcable: patchcable
+            },
+            success: function (result) {
+                alert(result.msg);
+            },
+            error: function (result) {
+                alert('error: '+ result.data);
+            }
+        });
+    });
+
+
+
+});
+</script>

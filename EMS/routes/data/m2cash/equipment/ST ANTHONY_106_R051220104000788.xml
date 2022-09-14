@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<M2CashDeviceInfo>
+  <StoreName>ST ANTHONY</StoreName>
+  <Address>TACLOBAN</Address>
+  <Area>LEYTE</Area>
+  <DeviceNumber>106</DeviceNumber>
+  <PortType>SERIAL</PortType>
+  <DeviceAdaptor>YES</DeviceAdaptor>
+  <CableType>SERIAL-USB</CableType>
+  <Modem>SMART HOME WIFI</Modem>
+  <ModemSerial>R051220104000788</ModemSerial>
+  <SIMCard>9644552866</SIMCard>
+  <ModemAdaptor>YES</ModemAdaptor>
+  <PatchCable>YES</PatchCable>
+  <DateDeploy/>
+  <Personel/>
+  <Status>ONHAND</Status>
+</M2CashDeviceInfo>

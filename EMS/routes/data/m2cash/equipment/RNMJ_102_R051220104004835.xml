@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<M2CashDeviceInfo>
+  <StoreName>RNMJ</StoreName>
+  <Address>LABANGON CEBU CITY</Address>
+  <Area>CEBU</Area>
+  <DeviceNumber>102</DeviceNumber>
+  <PortType>USB</PortType>
+  <DeviceAdaptor>YES</DeviceAdaptor>
+  <CableType>USB</CableType>
+  <Modem>SMART HOME WIFI</Modem>
+  <ModemSerial>R051220104004835</ModemSerial>
+  <SIMCard>9644552818</SIMCard>
+  <ModemAdaptor>YES</ModemAdaptor>
+  <PatchCable>YES</PatchCable>
+  <DateDeploy/>
+  <Personel/>
+  <Status>ONHAND</Status>
+</M2CashDeviceInfo>

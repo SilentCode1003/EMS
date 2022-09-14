@@ -81,11 +81,11 @@ router.post('/save', function(req, res, next) {
         data: err
       });
     });
-
+    console.log('File saved!');
     res.json({
       msg:'success'
     });
-    console.log('File saved!');
+    
 });
 
 let dartaArr = [];

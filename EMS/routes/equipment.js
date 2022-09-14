@@ -44,11 +44,10 @@ router.post('/save', function(req, res, next) {
         data: err
       });
     });
-
+    console.log('File saved!');
     res.json({
       msg:'success'
     });
-    console.log('File saved!');
 });
 
 router.post('/updateFile', function(req, res, next) {
@@ -124,14 +123,14 @@ router.get('/loadFile',function(req, res, next){
           'file': file
         });
     });
-
+    console.log('success');
     res.json({
       msg: 'success',
       data: data_arr
     });
      
   });
-  console.log('success');
+  
 });
 
 router.post('/retrieveFile',function(req, res, next){

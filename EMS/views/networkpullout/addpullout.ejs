@@ -1,25 +1,26 @@
-<div class="row">
-        <div class="input-area col-xl-4">
+<div class="card shadow mb-6">
+    <div class="row">
+        <div class="input-area col-xl-6 col-lg-5">
             <fieldset>  
                 <legend class="info black-txt">PULLOUT EQUPMENT INFO</legend>
                 <div class="report-entry">
-                        <label class="register-label" for="price">FROM STORE: </label>
+                        <label class="register-label" for="price">  STORE: </label>
                         <input class="register-info" type="text" id="fromstore" name="fromstore">
                 </div>
                 <div class="report-entry">
-                        <label class="register-label" for="price">ITEM NAME: </label>
+                        <label class="register-label" for="price">NAME: </label>
                         <input class="register-info" type="text" id="itemname" name="itemname">
                 </div>
                 <div class="report-entry">
-                        <label class="register-label" for="price">ITEM SERIAL: </label>
+                        <label class="register-label" for="price">SERIAL: </label>
                         <input class="register-info" type="text" id="itemserial" name="itemserial">
                 </div>
                 <div class="report-entry">
-                    <label class="register-label" for="price">DATE PULLOUT: </label>
+                    <label class="register-label" for="price">DATE: </label>
                     <input class="register-info" type="text" id="datepullout" name="datepullout">
                 </div>
                 <div class="report-entry">
-                    <label class="register-label" for="price">PULLOUT BY: </label>
+                    <label class="register-label" for="price">PERSONEL: </label>
                     <input class="register-info" type="text" id="pulloutby" name="pulloutby">
                 </div>
                 <div class="report-entry">
@@ -58,46 +59,51 @@
     </div>
     <br>
     <div class="row">
-        <div id="table-wrapper" class="col-xl-12 col-lg-6 input-area">
-           <table id="networkDeviceTbl">
-               <thead>
-                   <th>TICKET</th>
-                   <th>FROM STORE</th>
-                   <th>ITEM NAME</th>
-                   <th>ITEM SERIAL</th>
-                   <th>PULLOUT BY</th>
-                   <th>PULLOUT DATE</th>
-                   <th>STATUS</th>
-               </thead>
-               <tbody></tbody>
-           </table>
+        <div id="table-wrapper" class="col-xl-12 col-lg-4">
+            <div id="table-scroll">
+                <table id="networkDeviceTbl" style="font-size: 9.5px;">
+                    <thead>
+                        <th>TICKET</th>
+                        <th>FROM STORE</th>
+                        <th>ITEM NAME</th>
+                        <th>ITEM SERIAL</th>
+                        <th>PULLOUT BY</th>
+                        <th>PULLOUT DATE</th>
+                        <th>STATUS</th>
+                    </thead>
+                    <tbody style="font-size: 8.5px;"></tbody>
+                </table>
+            </div>   
         </div>
+    </div>
 </div>
 
 <!-- The Modal -->
-<div id="reportModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-button-container">
-            <span class="close">&times;</span>
-        </div>
-        <!-- AREA TO PRINT ONLY -->
-        <div id="printArea">
-                <div class="modal-header">
-                        <img class="displayed" src="/images/img/5L_logo.png" alt="...">
-                        <p><strong><span class="report-header">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>   
+<div id="reportModal" class="modal card shadow mb-4">
+    <dvi class="row">
+        <div class="col-xl-12 col-lg-6">
+            <!-- Modal content -->
+            <div class="modal-content">
+                    <div class="modal-button-container">
+                        <span class="close">&times;</span>
                     </div>
-                    <div class="modal-header-address">
-                        <p><span class="report-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
-                    </div>   
-                    <div class="modal-header-contact">
-                        <p><span class="report-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
-                    </div> 
-                    <div class="modal-body">
+                <!-- AREA TO PRINT ONLY -->
+                    <div id="printArea">
+                        <div class="modal-header">
+                            <img class="displayed" src="/images/img/5L_logo.png" alt="...">
+                            <p><strong><span class="report-header">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>   
+                        </div>
+                        <div class="modal-header-address">
+                            <p><span class="report-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
+                        </div>   
+                        <div class="modal-header-contact">
+                            <p><span class="report-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
+                        </div> 
+                        <div class="modal-body">
                         <h2 class='report-header' style="text-align: center"><%= reportTitle %></h2>
-                        <div id="table-wrapper-modal" class="col-lg-12">
-                            <table id="modalNetworkDeviceTbl">
-                                <thead>
+                        <div id="table-wrapper-modal" class="col-xl-12 col-lg-4">
+                            <table id="modalNetworkDeviceTbl" class="col-xl-12 col-lg-4 col-sm-12" >
+                                <thead style="font-size: 9.5px;">
                                     <th>TICKET</th>
                                     <th>FROM STORE</th>
                                     <th>ITEM NAME</th>
@@ -106,7 +112,7 @@
                                     <th>SIM TYPE</th>
                                     <th>SIM SERIAL</th>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody style="font-size: 8.5px;"></tbody>
                             </table>
                             <br>
                             <br>
@@ -115,23 +121,25 @@
                             <p><strong>Position:&nbsp;</strong><span><%= position %></span>&nbsp;</p>
                             <p><strong>Date:&nbsp;</strong><span><%= date %></span>&nbsp;</p>
                         </div> 
+            
+                        </div>
+                        <div class="modal-footer">
+                                <p><strong><span class="report-footer">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>
+                        </div>
+                        <div class="modal-footer-address">
+                            <p><span class="report-footer-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
+                        </div>   
+                        <div class="modal-footer-contact">
+                            <p><span class="report-footer-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
+                        </div>
+                    </div>
+                    
+                    <div id="modal-button-container" class="modal-buttons">
+                        <!-- <a class="success btn-glow" href="/EquipmentPullout/returnReport"> GENERATE RETURN </a> -->
+                        <button class="btn-glow-modal" id="printBtn" name="printBtn">PRINT</button>
+                    </div>
+            </div>
+        </div>
+    </dvi>
     
-                    </div>
-                    <div class="modal-footer">
-                            <p><strong><span class="report-footer">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>
-                    </div>
-                    <div class="modal-footer-address">
-                        <p><span class="report-footer-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
-                    </div>   
-                    <div class="modal-footer-contact">
-                        <p><span class="report-footer-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
-                    </div>
-        </div>
-        
-        <div id="modal-button-container" class="modal-buttons">
-            <!-- <a class="success btn-glow" href="/EquipmentPullout/returnReport"> GENERATE RETURN </a> -->
-            <button class="btn-glow-modal" id="printBtn" name="printBtn">PRINT</button>
-        </div>
-        
-    </div>   
-    </div>
+</div>

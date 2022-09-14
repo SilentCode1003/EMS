@@ -42,11 +42,11 @@ router.post('/save', function(req, res, next) {
         data: err
       });
     });
+
+    console.log(filename);
+    console.log('File saved!');
    
     res.json({
       msg:'success'
     });
-    
-    console.log(filename);
-    console.log('File saved!');
 });
