@@ -1,6 +1,9 @@
 <script>
 $(document).ready(function() {
 
+    $("#updateArea").toggle(0, function() {});
+    var selectedStore = "";
+
     var dataTable = $('#equipmentInfo').DataTable({
         'destroy': true,
         'processing' : true,
@@ -76,7 +79,43 @@ $(document).ready(function() {
         });
     });
 
+    $('#equipmentInfo tbody').on( 'click', 'tr', function () {
+        var data = dataTable.row( this ).data();
+        console.log(data);
 
+        var devicenum = data.DeviceNumber;
+        var storename = data.StoreName;
+        var modemserial = data.ModemSerial;
+
+        selectedStore = storename +"_"+ devicenum + "_" + modemserial;
+
+        document.getElementById('storefile').textContent = selectedStore;
+        $("#updateArea").toggle(1000, function() {});
+    });
+
+    $(document).on('click', "#updateBtn", function () {
+        var file = selectedStore + '.xml';
+        var datedeploy = $('#datedeployUpdate').val();
+        var status = $('#statusUpdate').val();
+        var personel = $('#personelUpdate').val();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/m2cashequipment/Update",
+            data: {
+                filename: file,
+                status: status,
+                datedeploy: datedeploy,
+                personel: personel
+            },
+            success: function (result) {
+                alert("Data Saved!");
+            },
+            error: function (result) {
+                alert('error: '+ result.data);
+            }
+        });
+    });
 
 });
 </script>

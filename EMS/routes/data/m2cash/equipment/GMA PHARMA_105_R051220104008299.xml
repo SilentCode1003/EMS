@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <M2CashDeviceInfo>
   <StoreName>GMA PHARMA</StoreName>
-  <Address>TACLOBAN</Address>
+  <Address>62V2+W7V, Salazar St, Downtown, Tacloban City, 6500 Leyte</Address>
   <Area>LEYTE</Area>
   <DeviceNumber>105</DeviceNumber>
   <PortType>SERIAL</PortType>
@@ -12,7 +12,7 @@
   <SIMCard>9644552418</SIMCard>
   <ModemAdaptor>YES</ModemAdaptor>
   <PatchCable>YES</PatchCable>
-  <DateDeploy/>
-  <Personel/>
-  <Status>ONHAND</Status>
+  <DateDeploy>2022-09-17</DateDeploy>
+  <Personel>JOSEPH ORENCIO</Personel>
+  <Status>DONE</Status>
 </M2CashDeviceInfo>

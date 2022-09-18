@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <M2CashDeviceInfo>
-  <StoreName>RNMJ</StoreName>
-  <Address>Katipunan St, Corner A. Lopez St, Cebu City, 6000 Cebu</Address>
+  <StoreName>BING PHARMACY CANDUMAN</StoreName>
+  <Address>9W7X+2F6, H Abellana, Mandaue City, 6014 Cebu</Address>
   <Area>CEBU</Area>
-  <DeviceNumber>102</DeviceNumber>
+  <DeviceNumber>101</DeviceNumber>
   <PortType>USB</PortType>
   <DeviceAdaptor>YES</DeviceAdaptor>
   <CableType>USB</CableType>
   <Modem>SMART HOME WIFI</Modem>
-  <ModemSerial>R051220104004835</ModemSerial>
-  <SIMCard>9644552818</SIMCard>
+  <ModemSerial>R051211216015653</ModemSerial>
+  <SIMCard>9644468833</SIMCard>
   <ModemAdaptor>YES</ModemAdaptor>
   <PatchCable>YES</PatchCable>
   <DateDeploy>2022-09-15</DateDeploy>
