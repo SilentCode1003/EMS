@@ -1,0 +1,61 @@
+<script>
+    var dataTable = $('#equipmentInfo').DataTable({
+        'destroy': true,
+        'processing': true,
+        'serverSide': true,
+        'paging': false,
+        'searching': false,
+        'info': false,
+        'scrollY': 200,
+        'scrollCollapse': true,
+        'serverMethod': 'GET',
+        'ajax': {
+            'url': '/m2cashstores/LodaData',
+        },
+        'columns': [
+            { data: 'StoreName' },
+            {
+                data: null,
+                'targets': 1,
+                'render': function (data, type, row, meta) {
+                    return '<a href=' + data['GoogleAddress'] + '>' + data['Address'] + '</a>';
+                }
+            },
+            { data: 'Area' }],
+        // { data : null, title:'Action', wrap: false, "render": function(){
+        //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+        //         }}
+        // ],
+        // 'columnDefs': [{
+        //     'targets': 1,
+        //     'render': function (data, type, row, meta) {
+        //         return '<a href=' + data['GoogleAddress'] + '>' + data['Address'] + '</a>';
+        //     }
+        // }]
+    });
+
+    $(document).on('click', "#registerBtn", function () {
+        var storename = $('#storename').val();
+        var address = $('#address').val();
+        var googleaddress = $('#googleaddress').val();
+        var area = $('#area').val();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/m2cashstores/save",
+            data: {
+                storename: storename,
+                googleaddress: googleaddress,
+                address: address,
+                area: area
+            },
+            success: function (result) {
+                alert(result.msg);
+            },
+            error: function (result) {
+                alert('error: ' + result.data);
+            }
+        });
+    });
+
+</script>
