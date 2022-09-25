@@ -19,9 +19,9 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 
-let data_arr = [];
+
 router.get('/loadFile', function(req, res, next) {
-  
+  let data_arr = [];
   output(__dirname + '/data/reports');
   async function getData(fullpath){
     return new Promise(resolve => {
@@ -73,12 +73,12 @@ router.get('/loadFile', function(req, res, next) {
     await getData(dir);
   }
 
-  res.json({
-    msg: 'success',
-    data: data_arr
-  })
-
-  data_arr = [];
+  setTimeout(() => {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    })
+  }, 1000);
 });
 
 router.post('/retrieveFile', function(req, res, next) {

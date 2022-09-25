@@ -54,9 +54,9 @@ router.post('/save', function(req, res, next) {
     });
 });
 
-let data_arr = [];
-router.get('/loadFile', function(req, res, next) {
 
+router.get('/loadFile', function(req, res, next) {
+  let data_arr = [];
   output(__dirname + '/data/network');
 
   async function getData(fullpath){
@@ -114,12 +114,12 @@ router.get('/loadFile', function(req, res, next) {
     await getData(dir);
   }
 
-  res.json({
-    msg: 'success',
-    data: data_arr
-  })
-
-  data_arr = [];
+  setTimeout(() => {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    })
+  }, 1000);
 });
 
 router.post('/updateFile', function(req, res, next) {

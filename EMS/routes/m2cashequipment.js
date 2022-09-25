@@ -75,8 +75,9 @@ router.post('/save', function(req, res, next) {
     });
 });
 
-let data_arr = [];
+
 router.get('/LodaData', function(req, res, next) {
+  let data_arr = [];
   output(__dirname + targetPath);
 
   async function getData(fullpath){
@@ -140,13 +141,12 @@ router.get('/LodaData', function(req, res, next) {
     await getData(dir);
   }
 
-  console.log(data_arr);
-  res.json({
-    msg: 'success',
-    data: data_arr
-  })
-
-  data_arr = [];
+  setTimeout(function () {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    });
+  }, 1000);
 });
 
 router.post('/Update',function(req, res, next){

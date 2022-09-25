@@ -12,37 +12,37 @@ var date = require('date-and-time');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  
+router.get('/', function (req, res, next) {
+
   let now = new Date();
-  let value = date.format(now,'YYYY-MM-DD');
-  
+  let value = date.format(now, 'YYYY-MM-DD');
+
   let preparedBy = 'JOSEPH A. ORENCIO';
   let position = 'IT Field Engineer';
   let underscore = '________________________';
   let title = 'Equipment Monitoring System';
   let reportTitle = 'EQUIPMENT PULLOUT / RETURN';
 
-  res.render('EquipmentPullout', { 
+  res.render('EquipmentPullout', {
     title: title,
     date: value,
     preparedBy: preparedBy,
     position: position,
     underscore: underscore,
     reportTitle: reportTitle
-   });
+  });
 
-   console.log({
-     title,
-     value,
-     preparedBy,
-     reportTitle
-   });
+  console.log({
+    title,
+    value,
+    preparedBy,
+    reportTitle
+  });
 });
 
 module.exports = router;
 
-router.post('/save', function(req, res, next) {
+router.post('/save', function (req, res, next) {
   var status = 'Active';
   var targetDir = '/data/pullout/equipment/active/';
   var ticket = req.body.ticket;
@@ -55,84 +55,85 @@ router.post('/save', function(req, res, next) {
   //Xml Details
   const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
     .ele('EquipmentPulloutInfo')
-      .ele('Ticket').txt(ticket).up()
-      .ele('Store').txt(store).up()
-      .ele('ItemName').txt(itemname).up()
-      .ele('ItemSerial').txt(itemserial).up()
-      .ele('PulloutDate').txt(pulloutdate).up()
-      .ele('PulloutBy').txt(pulloutby).up()
-      .ele('Status').txt(status).up()
+    .ele('Ticket').txt(ticket).up()
+    .ele('Store').txt(store).up()
+    .ele('ItemName').txt(itemname).up()
+    .ele('ItemSerial').txt(itemserial).up()
+    .ele('PulloutDate').txt(pulloutdate).up()
+    .ele('PulloutBy').txt(pulloutby).up()
+    .ele('Status').txt(status).up()
     .up();
-    const xml = root.end({ prettyPrint: true });
-    console.log(xml);
-    //Write and Save xml details into XML file
-    let filename = store + '_' + itemname + '_' + itemserial +'.xml';
-    let fullFileName = __dirname + targetDir + filename;
-    console.log(filename);
-    console.log(fullFileName);
-    fs.writeFileSync(fullFileName, xml, function(err) {
+  const xml = root.end({ prettyPrint: true });
+  console.log(xml);
+  //Write and Save xml details into XML file
+  let filename = store + '_' + itemname + '_' + itemserial + '.xml';
+  let fullFileName = __dirname + targetDir + filename;
+  console.log(filename);
+  console.log(fullFileName);
+  fs.writeFileSync(fullFileName, xml, function (err) {
     if (err) throw err;
-      res.json({
-        msg: 'error',
-        data: err
-      });
-    });
-    console.log('File saved!');
     res.json({
-      msg:'success'
+      msg: 'error',
+      data: err
     });
-    
+  });
+  console.log('File saved!');
+  res.json({
+    msg: 'success'
+  });
+
 });
 
-let dartaArr = [];
-router.get('/LoadData', function(req, res, next){
+
+router.get('/LoadData', function (req, res, next) {
+  let dartaArr = [];
   var targetDir = '/data/pullout/equipment/active/';
   var retrieveFilesDir = '/data/pullout/equipment/active';
   var targetPath = __dirname + retrieveFilesDir
 
   console.log(targetPath);
   output(targetPath);
-  
-  async function getData(fullpath){
+
+  async function getData(fullpath) {
     return new Promise(resolve => {
-        resolve(
+      resolve(
 
-          fs.readdir(fullpath, function(err, files){
-            if(err){
-              res.json({
-                msg: err
-              });
-            }
-
-            console.log(files);
-
-            
-            files.forEach(file => {
-              //Read each files in targetDir
-                xmlFileToJs(file, (err, obj) => {
-                  if (err){
-                    res.json({
-                      msg: 'error',
-                      data: err
-                    });
-                  }
-
-                  var data = obj['EquipmentPulloutInfo'];
-                  
-                    dartaArr.push({
-                      'Ticket': data['Ticket'],
-                      'Store': data['Store'],
-                      'ItemName': data['ItemName'],
-                      'ItemSerial': data['ItemSerial'],
-                      'PulloutDate': data['PulloutDate'],
-                      'PulloutBy': data['PulloutBy'],
-                      'Status': data['Status']
-                    });
-                }); 
+        fs.readdir(fullpath, function (err, files) {
+          if (err) {
+            res.json({
+              msg: err
             });
+          }
 
-          })
-        )
+          console.log(files);
+
+
+          files.forEach(file => {
+            //Read each files in targetDir
+            xmlFileToJs(file, (err, obj) => {
+              if (err) {
+                res.json({
+                  msg: 'error',
+                  data: err
+                });
+              }
+
+              var data = obj['EquipmentPulloutInfo'];
+
+              dartaArr.push({
+                'Ticket': data['Ticket'],
+                'Store': data['Store'],
+                'ItemName': data['ItemName'],
+                'ItemSerial': data['ItemSerial'],
+                'PulloutDate': data['PulloutDate'],
+                'PulloutBy': data['PulloutBy'],
+                'Status': data['Status']
+              });
+            });
+          });
+
+        })
+      )
     });
 
   }
@@ -140,19 +141,20 @@ router.get('/LoadData', function(req, res, next){
   function xmlFileToJs(filename, cb) {
     var filepath = path.normalize(path.join(__dirname + targetDir, filename));
     fs.readFile(filepath, 'utf8', function (err, xmlStr) {
-        if (err) throw (err);
-        xml2js.parseString(xmlStr, {}, cb);
+      if (err) throw (err);
+      xml2js.parseString(xmlStr, {}, cb);
     });
   }
 
-  async function output(dir){
+  async function output(dir) {
     await getData(dir);
   }
 
-  res.json({
-    msg: 'success',
-    data: dartaArr
-  })
+  setTimeout(function () {
+    res.json({
+      msg: 'success',
+      data: dartaArr
+    })
+  }, 1000);
 
-  dartaArr = [];
 });

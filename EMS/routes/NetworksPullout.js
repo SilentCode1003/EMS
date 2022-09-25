@@ -88,8 +88,9 @@ router.post('/save', function(req, res, next) {
     
 });
 
-let dartaArr = [];
+
 router.get('/LoadData', function(req, res, next){
+  let data_arr = [];
   var targetDir = '/data/pullout/network/active/';
   var retrieveFilesDir = '/data/pullout/network/active';
   var targetPath = __dirname + retrieveFilesDir
@@ -123,7 +124,7 @@ router.get('/LoadData', function(req, res, next){
 
                   var data = obj['NetworksPulloutInfo'];
                   
-                    dartaArr.push({
+                  data_arr.push({
                       'Ticket': data['Ticket'],
                       'Store': data['Store'],
                       'ItemName': data['ItemName'],
@@ -156,10 +157,10 @@ router.get('/LoadData', function(req, res, next){
     await getData(dir);
   }
 
-  res.json({
-    msg: 'success',
-    data: dartaArr
-  })
-
-  dartaArr = [];
+  setTimeout(() => {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    })
+  }, 1000);
 });

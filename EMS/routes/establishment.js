@@ -17,82 +17,82 @@ var convert = require('xml-js');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('establishment', { title: 'Equipment Monitoring System' });
 });
 
 module.exports = router;
 
-router.post('/save', function(req, res, next) {
+router.post('/save', function (req, res, next) {
   console.log('Received data');
 
-  var store = req.body.storecode+'_'+req.body.storename;
+  var store = req.body.storecode + '_' + req.body.storename;
 
   console.log(req.body);
   //#region Establishment Info
-    //Xml Details
-    const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
-      .ele('EstablistmentInfo')
-        .ele('StoreCode').txt(req.body.storecode).up()
-        .ele('StoreName').txt(req.body.storename).up()
-        .ele('StoreAddress').txt(req.body.storeaddress).up()
-        .ele('StoreEmail').txt(req.body.storeemail).up()
-        .ele('StoreArea').txt(req.body.storearea).up()
-      .up();
-      const xml = root.end({ prettyPrint: true });
-
-      console.log('Create XML');
-
-      //Write and Save xml details into XML file
-      let filename = req.body.storecode+'_'+req.body.storename+'.xml';
-      let fullFileName = __dirname + '/data/establishment/'+ filename;
-      fs.writeFileSync(fullFileName, xml, function(err) {
-      if (err) throw err;
-        res.json({
-          msg: 'error',
-          data: err
-        });
-      });
-    //#endregion
-
-    //#region Report Info
-    const rootInfo = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
-    .ele('ReportInfo')
-      .ele('StoreName').txt(store).up()
-      .ele('First').txt().up()
-      .ele('Second').txt().up()
-      .ele('Third').txt().up()
+  //Xml Details
+  const root = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+    .ele('EstablistmentInfo')
+    .ele('StoreCode').txt(req.body.storecode).up()
+    .ele('StoreName').txt(req.body.storename).up()
+    .ele('StoreAddress').txt(req.body.storeaddress).up()
+    .ele('StoreEmail').txt(req.body.storeemail).up()
+    .ele('StoreArea').txt(req.body.storearea).up()
     .up();
-    const xmlInfo = rootInfo.end({ prettyPrint: true });
+  const xml = root.end({ prettyPrint: true });
 
-    console.log('Create XML');
+  console.log('Create XML');
 
-    //Write and Save xml details into XML file
-    let filenameInfo = req.body.storecode + '_' + req.body.storename+'_report'+'.xml';
-    let fullFileNameInfo = __dirname + '/data/reports/'+ filenameInfo;
-    fs.writeFileSync(fullFileNameInfo, xmlInfo, function(err) {
+  //Write and Save xml details into XML file
+  let filename = req.body.storecode + '_' + req.body.storename + '.xml';
+  let fullFileName = __dirname + '/data/establishment/' + filename;
+  fs.writeFileSync(fullFileName, xml, function (err) {
     if (err) throw err;
-      res.json({
-        msg: 'error',
-        data: err
-      });
-    });
-    //#endregion
-    console.log('File saved!');
     res.json({
-      msg:'success'
+      msg: 'error',
+      data: err
     });
-    
+  });
+  //#endregion
+
+  //#region Report Info
+  const rootInfo = create({ version: '1.0', encoding: "UTF-8", standalone: "yes" })
+    .ele('ReportInfo')
+    .ele('StoreName').txt(store).up()
+    .ele('First').txt().up()
+    .ele('Second').txt().up()
+    .ele('Third').txt().up()
+    .up();
+  const xmlInfo = rootInfo.end({ prettyPrint: true });
+
+  console.log('Create XML');
+
+  //Write and Save xml details into XML file
+  let filenameInfo = req.body.storecode + '_' + req.body.storename + '_report' + '.xml';
+  let fullFileNameInfo = __dirname + '/data/reports/' + filenameInfo;
+  fs.writeFileSync(fullFileNameInfo, xmlInfo, function (err) {
+    if (err) throw err;
+    res.json({
+      msg: 'error',
+      data: err
+    });
+  });
+  //#endregion
+  console.log('File saved!');
+  res.json({
+    msg: 'success'
+  });
+
 });
 
-router.post('/saveEquipmentInfo', function(req, res, next) {
+router.post('/saveEquipmentInfo', function (req, res, next) {
 
   var data = req.body.data;
   //#region Establishment Info
   let filenameFinal = req.body.storename + '.json';
-  let fullFileNameFinal = __dirname + '/data/storeinfo/'+ filenameFinal;
-  fs.writeFileSync(fullFileNameFinal, data, function(err) {
-  if (err) throw err;
+  let fullFileNameFinal = __dirname + '/data/storeinfo/' + filenameFinal;
+  fs.writeFileSync(fullFileNameFinal, data, function (err) {
+    if (err) throw err;
     res.json({
       msg: 'writeFileSync error',
       data: err
@@ -101,52 +101,52 @@ router.post('/saveEquipmentInfo', function(req, res, next) {
   //#endregion
 
   res.json({
-    msg:'success'
+    msg: 'success'
   });
 
   console.log('File saved!');
 });
 
-let data_arr = [];
-router.get('/loadFile', function(req, res, next) {
 
+router.get('/loadFile', function (req, res, next) {
+  let data_arr = [];
   output(__dirname + '/data/establishment');
 
-  async function getData(fullpath){
+  async function getData(fullpath) {
     return new Promise(resolve => {
-        resolve(
+      resolve(
 
-          fs.readdir(fullpath, function(err, files){
-            if(err){
-              res.json({
-                msg: err
-              });
-            }
-
-
-            files.forEach(file => {
-                xmlFileToJs(file,
-                  (err, obj) => {
-                  if (err){
-                    res.json({
-                      msg: 'error',
-                      data: err
-                    });
-                  }
-                  var data = obj['EstablistmentInfo'];
-
-                    data_arr.push({
-                      'StoreCode': data['StoreCode'],
-                      'StoreName': data['StoreName'],
-                      'StoreAddress': data['StoreAddress'],
-                      'StoreEmail': data['StoreEmail'],
-                      'StoreArea': data['StoreArea']
-                    });
-                });
+        fs.readdir(fullpath, function (err, files) {
+          if (err) {
+            res.json({
+              msg: err
             });
+          }
 
-          })
-        )
+
+          files.forEach(file => {
+            xmlFileToJs(file,
+              (err, obj) => {
+                if (err) {
+                  res.json({
+                    msg: 'error',
+                    data: err
+                  });
+                }
+                var data = obj['EstablistmentInfo'];
+
+                data_arr.push({
+                  'StoreCode': data['StoreCode'],
+                  'StoreName': data['StoreName'],
+                  'StoreAddress': data['StoreAddress'],
+                  'StoreEmail': data['StoreEmail'],
+                  'StoreArea': data['StoreArea']
+                });
+              });
+          });
+
+        })
+      )
     });
 
   }
@@ -154,47 +154,47 @@ router.get('/loadFile', function(req, res, next) {
   function xmlFileToJs(filename, cb) {
     var filepath = path.normalize(path.join(__dirname + '/data/establishment/', filename));
     fs.readFile(filepath, 'utf8', function (err, xmlStr) {
-        if (err) throw (err);
-        xml2js.parseString(xmlStr, {}, cb);
+      if (err) throw (err);
+      xml2js.parseString(xmlStr, {}, cb);
     });
   }
 
-  async function output(dir){
+  async function output(dir) {
     await getData(dir);
   }
 
-  res.json({
-    msg: 'success',
-    data: data_arr
-  })
-
-  data_arr = [];
+  setTimeout(function () {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    })
+  }, 1000)
 });
 
 
-class EqipmentInfo{
-  constructor(){
+class EqipmentInfo {
+  constructor() {
 
   }
 
-  set ItemAllocation(itemallocation){
+  set ItemAllocation(itemallocation) {
     this.itemallocation = itemallocation;
   }
-  get ItemAllocation(){
+  get ItemAllocation() {
     return this._itemallocation;
   }
 
-  set ItemName(itemname){
+  set ItemName(itemname) {
     this.itemname = itemname;
   }
-  get ItemName(){
+  get ItemName() {
     return this._itemname;
   }
 
-  set ItemSerial(itemserial){
+  set ItemSerial(itemserial) {
     this.itemserial = itemserial;
   }
-  get ItemSerial(){
+  get ItemSerial() {
     return this._itemserial;
   }
 }

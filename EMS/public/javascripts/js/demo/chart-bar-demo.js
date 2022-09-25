@@ -2,6 +2,181 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+$.ajax(
+  {
+    url: "http://localhost:3000/getEquipment",
+    success: function (result) {
+      var ctx = document.getElementById("myBarChart");
+      var ctx2 = document.getElementById("networkDeviceBarChart");
+      var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: result.EquipmentLable,
+          datasets: [{
+            label: "Total",
+            backgroundColor: "#4e73df",
+            hoverBackgroundColor: "#2e59d9",
+            borderColor: "#4e73df",
+            data: result.EquimentData,
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: result.maxTicksLimit
+              },
+              maxBarThickness: 25,
+            }],
+            yAxes: [{
+              ticks: {
+                min: 0,
+                max: 100,
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function (value, index, values) {
+                  return '' + number_format(value);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            callbacks: {
+              label: function (tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+              }
+            }
+          },
+        }
+      });
+
+      //Network Device Bar Chart
+      var networkBarChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: result.EquipmentLable,
+          datasets: [{
+            label: "Total",
+            backgroundColor: "#4e73df",
+            hoverBackgroundColor: "#2e59d9",
+            borderColor: "#4e73df",
+            data: result.networkEquimentData,
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: result.maxTicksLimit
+              },
+              maxBarThickness: 25,
+            }],
+            yAxes: [{
+              ticks: {
+                min: 0,
+                max: 100,
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function (value, index, values) {
+                  return '' + number_format(value);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            callbacks: {
+              label: function (tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+              }
+            }
+          },
+        }
+      });
+
+      document.getElementById('seveneleven').textContent = result.seveneleven;
+      document.getElementById('m2cash').textContent = result.m2cash;
+
+      console.log(result.EquipmentLable + result.EquimentData + result.maxTicksLimit)
+    }
+  });
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -11,7 +186,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
     dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
     s = '',
-    toFixedFix = function(n, prec) {
+    toFixedFix = function (n, prec) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
     };
@@ -28,87 +203,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [{
-      label: "Total",
-      backgroundColor: "#4e73df",
-      hoverBackgroundColor: "#2e59d9",
-      borderColor: "#4e73df",
-      data: [30, 50, 60, 33, 21, 12],
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    layout: {
-      padding: {
-        left: 10,
-        right: 25,
-        top: 25,
-        bottom: 0
-      }
-    },
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        },
-        maxBarThickness: 25,
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 100,
-          maxTicksLimit: 5,
-          padding: 10,
-          // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
-            return '' + number_format(value);
-          }
-        },
-        gridLines: {
-          color: "rgb(234, 236, 244)",
-          zeroLineColor: "rgb(234, 236, 244)",
-          drawBorder: false,
-          borderDash: [2],
-          zeroLineBorderDash: [2]
-        }
-      }],
-    },
-    legend: {
-      display: false
-    },
-    tooltips: {
-      titleMarginBottom: 10,
-      titleFontColor: '#6e707e',
-      titleFontSize: 14,
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      caretPadding: 10,
-      callbacks: {
-        label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
-        }
-      }
-    },
-  }
-});
+
 
 // $(document).ready(function(){  
 //   alert('application started');  
