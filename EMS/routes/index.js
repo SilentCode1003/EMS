@@ -13,7 +13,7 @@ router.get('/getEquipment', function (req, res, next) {
   //list of paths
   var sevelelevenstores = __dirname + '/data/establishment/';
   var m2cashstores = __dirname + '/data/m2cash/stores/';
-  var equipmentspare = __dirname + '/data/equipments/';
+  var equipmentspare = __dirname + '/data/equipments/spare/';
   var equipmentpullout = __dirname + '/data/pullout/equipment/active/';
   var equipmentreturn = __dirname + '/data/pullout/equipment/return/';
   var equipmentdeploy = __dirname + '/data/equipments/deploy/';
@@ -52,6 +52,10 @@ router.get('/getEquipment', function (req, res, next) {
 
   fs.readdir(equipmentreturn,(err, files) => {
     equipmentReturn = files.length;
+  })
+
+  fs.readdir(equipmentdeploy,(err, files) => {
+    equipmentDeploy = files.length;
   })
 
   fs.readdir(networkspare,(err, files) => {

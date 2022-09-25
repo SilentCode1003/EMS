@@ -5,9 +5,13 @@ var router = express.Router();
 
 var path = require('path');
 
+
 const { create } = require('xmlbuilder2');
 var xml2js = require('xml2js');
-var parser = new xml2js.Parser();
+
+
+var EquipmentDirectorySpare = __dirname + '/data/equipments/spare/';
+var EquipmentDirectoryDeploy = __dirname + '/data/equipments/deploy/';
 
 
 
@@ -51,9 +55,10 @@ router.post('/save', function (req, res, next) {
 });
 
 router.post('/updateFile', function (req, res, next) {
+  var filename = req.body.filename;
 
-  console.log('/updateFile: ' + req.body.filename);
-  xmlFileToJs(req.body.filename, function (err, obj) {
+  console.log('/updateFile: ' + filename);
+  xmlFileToJs(filename, function (err, obj) {
     if (err) {
       res.json({
         msg: 'error',
@@ -79,7 +84,7 @@ router.post('/updateFile', function (req, res, next) {
     console.log(xml);
 
     //Write and Save xml details into XML file
-    let fullFileName = __dirname + '/data/equipments/' + req.body.filename;
+    let fullFileName = EquipmentDirectorySpare + filename;
 
     fs.writeFileSync(fullFileName, xml, function (err) {
       if (err) throw err;
@@ -89,6 +94,17 @@ router.post('/updateFile', function (req, res, next) {
       });
     });
 
+    // var source = fs.createReadStream(EquipmentDirectorySpare + filename);
+    // var dest = fs.createWriteStream(EquipmentDirectoryDeploy + filename);
+
+    // source.pipe(dest);
+    // source.on('end', function () { /* copied */ console.log('File moved to deploy folder...'); });
+    // source.on('error', function (err) { /* error */ throw err;});
+
+    fs.renameSync(EquipmentDirectorySpare + filename, EquipmentDirectoryDeploy + filename);
+    console.log(`Moved ${EquipmentDirectorySpare + filename} to ${EquipmentDirectoryDeploy + filename}`);
+
+
     res.json({
       msg: 'success'
     });
@@ -96,7 +112,7 @@ router.post('/updateFile', function (req, res, next) {
 
   //#region xmlFileToJs
   function xmlFileToJs(filename, cb) {
-    var filepath = path.normalize(path.join(__dirname + '/data/equipments/', filename));
+    var filepath = path.normalize(path.join(EquipmentDirectorySpare, filename));
     fs.readFile(filepath, 'utf8', function (err, xmlStr) {
       if (err) throw (err);
       xml2js.parseString(xmlStr, {}, cb);
@@ -106,12 +122,9 @@ router.post('/updateFile', function (req, res, next) {
 });
 
 router.get('/loadFile', function (req, res, next) {
-  var dir = __dirname + '/data/equipments/';
   var data_arr = [];
 
-  fs.readdir(dir, (err, files) => {
-
-
+  fs.readdir(EquipmentDirectorySpare, (err, files) => {
     if (err) {
       res.json({
         msg: 'error',
@@ -124,43 +137,6 @@ router.get('/loadFile', function (req, res, next) {
         'file': file
       });
     });
-    console.log('success');
-    res.json({
-      msg: 'success',
-      data: data_arr
-    });
-
-  });
-
-});
-
-router.post('/retrieveFile', function (req, res, next) {
-
-  var data_arr = [];
-
-  console.log(req.body.serial)
-
-  xmlFileToJs(req.body.serial, function (err, obj) {
-    if (err) {
-      res.json({
-        msg: 'error',
-        data: err
-      });
-    }
-
-    var data = obj['ItemEquipment'];
-    data_arr.push({
-      'Serial': data['Serial'],
-      'ItemName': data['ItemName'],
-      'DateReceive': data['DateReceive'],
-      'ItemType': data['ItemType'],
-      'DeployTo': data['DeployTo'],
-      'DeployDate': data['DeployDate'],
-      'Ticket': data['Ticket'],
-      'Personel': data['Personel']
-    });
-
-
   });
 
   setTimeout(function () {
@@ -170,21 +146,127 @@ router.post('/retrieveFile', function (req, res, next) {
     });
   }, 1000);
 
-  //#region xmlFileToJs
-  function xmlFileToJs(filename, cb) {
-    var filepath = path.normalize(path.join(__dirname + '/data/equipments/', filename));
-    fs.readFile(filepath, 'utf8', function (err, xmlStr) {
-      if (err) throw (err);
-      xml2js.parseString(xmlStr, {}, cb);
+});
+
+router.post('/searchFile', function (req, res, next) {
+  var data_arr = [];
+  var serial = req.body.serial;
+
+  console.log(serial);
+
+  fs.readdir(EquipmentDirectorySpare, (err, files) => {
+    if (err) {
+      res.json({
+        msg: 'error',
+        data: err
+      });
+    }
+
+    files.forEach(file => {
+      console.log(file);
+      if(file.includes(serial)){
+        data_arr.push({
+          'file': file
+        });
+      }
     });
+  });
+
+  setTimeout(function () {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    });
+  }, 1000);
+
+});
+
+router.post('/retrieveFile', function (req, res, next) {
+
+  var data_arr = [];
+  var file = req.body.serial;
+  var status = req.body.status;
+
+  console.log(file)
+
+  if (status == 'spare') {
+    xmlFileToJs(file, function (err, obj) {
+      if (err) {
+        res.json({
+          msg: 'error',
+          data: err
+        });
+      }
+
+      var data = obj['ItemEquipment'];
+      data_arr.push({
+        'Serial': data['Serial'],
+        'ItemName': data['ItemName'],
+        'DateReceive': data['DateReceive'],
+        'ItemType': data['ItemType'],
+        'DeployTo': data['DeployTo'],
+        'DeployDate': data['DeployDate'],
+        'Ticket': data['Ticket'],
+        'Personel': data['Personel']
+      });
+    });
+
+    function xmlFileToJs(filename, cb) {
+      var filepath = path.normalize(path.join(EquipmentDirectorySpare, filename));
+      fs.readFile(filepath, 'utf8', function (err, xmlStr) {
+        if (err) throw (err);
+        xml2js.parseString(xmlStr, {}, cb);
+      });
+    }
   }
-  //#endregion
+
+  if (status == 'deploy') {
+    xmlFileToJs(file, function (err, obj) {
+      if (err) {
+        res.json({
+          msg: 'error',
+          data: err
+        });
+      }
+
+      var data = obj['ItemEquipment'];
+      data_arr.push({
+        'Serial': data['Serial'],
+        'ItemName': data['ItemName'],
+        'DateReceive': data['DateReceive'],
+        'ItemType': data['ItemType'],
+        'DeployTo': data['DeployTo'],
+        'DeployDate': data['DeployDate'],
+        'Ticket': data['Ticket'],
+        'Personel': data['Personel']
+      });
+    });
+
+    function xmlFileToJs(filename, cb) {
+      var filepath = path.normalize(path.join(EquipmentDirectoryDeploy, filename));
+      fs.readFile(filepath, 'utf8', function (err, xmlStr) {
+        if (err) throw (err);
+        xml2js.parseString(xmlStr, {}, cb);
+      });
+    }
+  }
+
+
+
+  setTimeout(function () {
+    res.json({
+      msg: 'success',
+      data: data_arr
+    });
+  }, 1000);
+
+ 
 });
 
 router.get('/readXML', function (req, res, next) {
   let equipmentData = new EquipmentModel();
 
-  var dir = __dirname + '/data/equipments/';
+  var dir = EquipmentDirectorySpare;
   fs.readdir(dir, (err, files) => {
     if (err) {
       res.json({
