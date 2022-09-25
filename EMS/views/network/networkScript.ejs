@@ -1,44 +1,72 @@
 <script>
- $(document).ready(function() {
-     var filename = "";
-    $("#updateArea").toggle(0, function() {
-    });
+    $(document).ready(function () {
+        var filename = "";
+        $("#updateArea").toggle(0, function () {
+        });
 
-    var dataTable = $('#networkDeviceTbl').DataTable({
-        'destroy': true,
-        'processing' : true,
-        'serverSide' : true,
-        'paging' : false,
-        'searching': false,
-        'info': false,
-        'serverMethod' : 'get',
-        'ajax' : {
-            'url' : '/networks/loadFile',
-        },
-        'columns' : [
-            { data : 'ItemName'},
-            { data : 'ItemSerial' },
-            { data : 'DateReceived' },
-            { data : 'ReceivedBy' },
-            { data : 'DeployTo' },
-            { data : 'DateDeploy' },
-            { data : 'DeployBy' },
-            { data : 'Ticket' }
-            // { data : null, title:'Action', wrap: false, "render": function(){
-            //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
-            //         }}
-        ] 
-    });
+        var dataTable = $('#networkDeviceTbl').DataTable({
+            'destroy': true,
+            'processing': true,
+            'serverSide': true,
+            'paging': false,
+            'searching': false,
+            'info': false,
+            'serverMethod': 'get',
+            'ajax': {
+                'url': '/networks/loadFile',
+            },
+            'columns': [
+                { data: 'ItemName' },
+                { data: 'ItemSerial' },
+                { data: 'DateReceived' },
+                { data: 'ReceivedBy' },
+                { data: 'DeployTo' },
+                { data: 'DateDeploy' },
+                { data: 'DeployBy' },
+                { data: 'Ticket' }
+                // { data : null, title:'Action', wrap: false, "render": function(){
+                //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                //         }}
+            ]
+        });
 
-    $(document).on('click', "#registerNetworkDeviceBtn", function () {
-        var itemname = $('#itemname').val();
-        var itemserial = $('#itemserial').val();
-        var datereceived = $('#datereceived').val();
-        var receivedby = $('#receivedby').val();
+        function ReloadDataTable() {
+            dataTable = $('#networkDeviceTbl').DataTable({
+                'destroy': true,
+                'processing': true,
+                'serverSide': true,
+                'paging': false,
+                'searching': false,
+                'info': false,
+                'serverMethod': 'get',
+                'ajax': {
+                    'url': '/networks/loadFile',
+                },
+                'columns': [
+                    { data: 'ItemName' },
+                    { data: 'ItemSerial' },
+                    { data: 'DateReceived' },
+                    { data: 'ReceivedBy' },
+                    { data: 'DeployTo' },
+                    { data: 'DateDeploy' },
+                    { data: 'DeployBy' },
+                    { data: 'Ticket' }
+                    // { data : null, title:'Action', wrap: false, "render": function(){
+                    //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                    //         }}
+                ]
+            });
+        }
 
-        console.log('clicked! ');
+        $(document).on('click', "#registerNetworkDeviceBtn", function () {
+            var itemname = $('#itemname').val();
+            var itemserial = $('#itemserial').val();
+            var datereceived = $('#datereceived').val();
+            var receivedby = $('#receivedby').val();
 
-        $.ajax({
+            console.log('clicked! ');
+
+            $.ajax({
                 type: "POST",
                 url: "http://localhost:3000/networks/save",
                 data: {
@@ -51,58 +79,61 @@
                     alert("Data Saved!");
                 },
                 error: function (result) {
-                    alert('error: '+ result.data);
+                    alert('error: ' + result.data);
                 }
             });
 
-    });
+        });
 
-    $('#networkDeviceTbl tbody').on( 'click', 'tr', function () {
-            var data = dataTable.row( this ).data();
+        $('#networkDeviceTbl tbody').on('click', 'tr', function () {
+            var data = dataTable.row(this).data();
             var serial = data.ItemSerial;
             var itemname = data.ItemName;
-            filename = itemname + "_" + serial +".xml";
+            filename = itemname + "_" + serial + ".xml";
 
             console.log(filename);
             document.getElementById('networkSelected').textContent = serial;
-            $("#updateArea").toggle(1000, function() {
+            $("#updateArea").toggle(1000, function () {
 
             });
         });
 
-    $(document).on('click', "#updateBtn", function () {
-        var elem = document.getElementById("updateBtn");
-        console.log(elem);
-        
-        $("#updateArea").toggle(1000, function() {
+        $(document).on('click', "#updateBtn", function () {
+            var elem = document.getElementById("updateBtn");
+            console.log(elem);
 
+            $("#updateArea").toggle(1000, function () {
+
+            });
+        });
+
+        $(document).on('click', "#saveBtn", function () {
+            var file = filename;
+            var deployto = $('#deployto').val();
+            var datedeploy = $('#datedeploy').val();
+            var ticket = $('#ticket').val();
+            var personel = $('#personel').val();
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/networks/updateFile",
+                data: {
+                    filename: file,
+                    deployto: deployto,
+                    datedeploy: datedeploy,
+                    ticket: ticket,
+                    personel: personel
+                },
+                success: function (result) {
+                    ReloadDataTable();
+                    $("#updateArea").toggle(0, function () {
+                    });
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: ' + result.data);
+                }
+            });
         });
     });
- 
-    $(document).on('click', "#saveBtn", function () {
-        var file = filename;
-        var deployto = $('#deployto').val();
-        var datedeploy = $('#datedeploy').val();
-        var ticket = $('#ticket').val();
-        var personel = $('#personel').val();
-
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:3000/networks/updateFile",
-            data: {
-                filename: file,
-                deployto: deployto,
-                datedeploy: datedeploy,
-                ticket: ticket,
-                personel: personel
-            },
-            success: function (result) {
-                alert("Data Saved!");
-            },
-            error: function (result) {
-                alert('error: '+ result.data);
-            }
-        });
-    });
-});
 </script>

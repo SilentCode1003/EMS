@@ -17,7 +17,7 @@ router.get('/getEquipment', function (req, res, next) {
   var equipmentpullout = __dirname + '/data/pullout/equipment/active/';
   var equipmentreturn = __dirname + '/data/pullout/equipment/return/';
   var equipmentdeploy = __dirname + '/data/equipments/deploy/';
-  var networkspare = __dirname + '/data/network/';
+  var networkspare = __dirname + '/data/network/spare/';
   var networkpullout = __dirname + '/data/pullout/network/active/';
   var networkreturn = __dirname + '/data/pullout/network/return/';
   var networkdeploy = __dirname + '/data/network/deploy/';
@@ -68,6 +68,10 @@ router.get('/getEquipment', function (req, res, next) {
 
   fs.readdir(networkreturn,(err, files) => {
     networkReturn = files.length;
+  })
+
+  fs.readdir(networkdeploy,(err, files) => {
+    networkDeploy = files.length;
   })
 
 
