@@ -1,19 +1,19 @@
 <div class="card shadow mb-6">
     <div class="row">
         <div class="input-area col-xl-6 col-lg-5">
-            <fieldset>  
+            <fieldset>
                 <legend class="info black-txt">PULLOUT EQUPMENT INFO</legend>
                 <div class="report-entry">
-                        <label class="register-label" for="price">  STORE: </label>
-                        <input class="register-info" type="text" id="fromstore" name="fromstore">
+                    <label class="register-label" for="price"> STORE: </label>
+                    <input class="register-info" type="text" id="fromstore" name="fromstore">
                 </div>
                 <div class="report-entry">
-                        <label class="register-label" for="price">NAME: </label>
-                        <input class="register-info" type="text" id="itemname" name="itemname">
+                    <label class="register-label" for="price">NAME: </label>
+                    <input class="register-info" type="text" id="itemname" name="itemname">
                 </div>
                 <div class="report-entry">
-                        <label class="register-label" for="price">SERIAL: </label>
-                        <input class="register-info" type="text" id="itemserial" name="itemserial">
+                    <label class="register-label" for="price">SERIAL: </label>
+                    <input class="register-info" type="text" id="itemserial" name="itemserial">
                 </div>
                 <div class="report-entry">
                     <label class="register-label" for="price">DATE: </label>
@@ -29,26 +29,26 @@
                 </div>
                 <br>
                 <button class="btn-glow" id="simBtn" name="simBtn">SIM</button>
-                <div id='updateArea'> 
-                        <br>
-                        <fieldset>  
-                            <legend class="info black-txt">SIMCARD INFO</legend>
-                            <div class="report-entry">
-                                <label class="register-label" for="price">SIM TYPE</label>
-                                <input class="register-info" type="text" id="simtype" name="simtype">
-                            </div>
-                            <div class="report-entry">
-                                <label class="register-label" for="price">SIM SERIAL</label>
-                                <input class="register-info" type="text" id="simserial" name="simserial">
-                            </div>
-                        </fieldset>
-                    </div>
+                <div id='updateArea'>
+                    <br>
+                    <fieldset>
+                        <legend class="info black-txt">SIMCARD INFO</legend>
+                        <div class="report-entry">
+                            <label class="register-label" for="price">SIM TYPE</label>
+                            <input class="register-info" type="text" id="simtype" name="simtype">
+                        </div>
+                        <div class="report-entry">
+                            <label class="register-label" for="price">SIM SERIAL</label>
+                            <input class="register-info" type="text" id="simserial" name="simserial">
+                        </div>
+                    </fieldset>
+                </div>
                 <br>
                 <div>
                     <button class="btn-right btn-glow" id="addEquipmentBtn" name="addEquipmentBtn">ADD TO LIST</button>
-                </div>     
+                </div>
             </fieldset>
-        </div>   
+        </div>
     </div>
     <hr class="custom-hr">
     <br>
@@ -73,7 +73,7 @@
                     </thead>
                     <tbody style="font-size: 8.5px;"></tbody>
                 </table>
-            </div>   
+            </div>
         </div>
     </div>
 </div>
@@ -84,25 +84,27 @@
         <div class="col-xl-12 col-lg-6">
             <!-- Modal content -->
             <div class="modal-content">
-                    <div class="modal-button-container">
-                        <span class="close">&times;</span>
-                    </div>
+                <div class="modal-button-container">
+                    <span class="close">&times;</span>
+                </div>
                 <!-- AREA TO PRINT ONLY -->
-                    <div id="printArea">
-                        <div class="modal-header">
-                            <img class="displayed" src="/images/img/5L_logo.png" alt="...">
-                            <p><strong><span class="report-header">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>   
-                        </div>
-                        <div class="modal-header-address">
-                            <p><span class="report-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
-                        </div>   
-                        <div class="modal-header-contact">
-                            <p><span class="report-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
-                        </div> 
-                        <div class="modal-body">
+                <div id="printArea">
+                    <div class="modal-header">
+                        <img class="displayed" src="/images/img/5L_logo.png" alt="...">
+                        <p><strong><span class="report-header">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES
+                                    CORP.</span></strong></p>
+                    </div>
+                    <div class="modal-header-address">
+                        <p><span class="report-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1,
+                                City of Bi&ntilde;an, Laguna</span></p>
+                    </div>
+                    <div class="modal-header-contact">
+                        <p><span class="report-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
+                    </div>
+                    <div class="modal-body">
                         <h2 class='report-header' style="text-align: center"><%= reportTitle %></h2>
                         <div id="table-wrapper-modal" class="col-xl-12 col-lg-4">
-                            <table id="modalNetworkDeviceTbl" class="col-xl-12 col-lg-4 col-sm-12" >
+                            <table id="modalNetworkDeviceTbl" class="col-xl-12 col-lg-4 col-sm-12">
                                 <thead style="font-size: 9.5px;">
                                     <th>TICKET</th>
                                     <th>FROM STORE</th>
@@ -117,29 +119,34 @@
                             <br>
                             <br>
                             <br>
-                            <p><strong>Prepared by:&nbsp;</strong><span><%= preparedBy %></span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Received by: <%= underscore %> &nbsp;</strong></p>
+                            <p><strong>Prepared by:&nbsp;</strong><span><%= preparedBy %></span> &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                <strong>Received by: <%= underscore %> &nbsp;</strong></p>
                             <p><strong>Position:&nbsp;</strong><span><%= position %></span>&nbsp;</p>
                             <p><strong>Date:&nbsp;</strong><span><%= date %></span>&nbsp;</p>
-                        </div> 
-            
                         </div>
-                        <div class="modal-footer">
-                                <p><strong><span class="report-footer">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES CORP.</span></strong></p>
-                        </div>
-                        <div class="modal-footer-address">
-                            <p><span class="report-footer-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita Complex 1, City of Bi&ntilde;an, Laguna</span></p>
-                        </div>   
-                        <div class="modal-footer-contact">
-                            <p><span class="report-footer-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
-                        </div>
+
                     </div>
-                    
-                    <div id="modal-button-container" class="modal-buttons">
-                        <!-- <a class="success btn-glow" href="/EquipmentPullout/returnReport"> GENERATE RETURN </a> -->
-                        <button class="btn-glow-modal" id="printBtn" name="printBtn">PRINT</button>
+                    <div class="modal-footer">
+                        <p><strong><span class="report-footer">5L SOLUTIONS SUPPLY &amp; ALLIED SERVICES
+                                    CORP.</span></strong></p>
                     </div>
+                    <div class="modal-footer-address">
+                        <p><span class="report-footer-subheader">Phase 3B Block 18 Lot 15, Golf Drive Street Pacita
+                                Complex 1, City of Bi&ntilde;an, Laguna</span></p>
+                    </div>
+                    <div class="modal-footer-contact">
+                        <p><span class="report-footer-subheader">Tel.Nos: 273-44-69/952-15-60</span></p>
+                    </div>
+                </div>
+
+                <div id="modal-button-container" class="modal-buttons">
+                    <!-- <a class="success btn-glow" href="/EquipmentPullout/returnReport"> GENERATE RETURN </a> -->
+                    <button class="btn-glow-modal" id="printBtn" name="printBtn">PRINT</button>
+                </div>
             </div>
         </div>
     </dvi>
-    
+
 </div>
