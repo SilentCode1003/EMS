@@ -13,7 +13,7 @@ let storename="";
         console.log(store +" "+ assignto +" "+ dateperform +" "+ quarter +" "+ filename);
         $.ajax({
             type: "POST",
-            url: "http://localhost:3000/reports/save",
+            url: "/reports/save",
             data: {
                 filename: filename,
                 storename: store,

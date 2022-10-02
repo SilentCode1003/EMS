@@ -55,7 +55,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost:3000/m2cashequipment/save",
+            url: "/m2cashequipment/save",
             data: {
                 storename: storename,
                 address: address,
@@ -101,7 +101,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost:3000/m2cashequipment/Update",
+            url: "/m2cashequipment/Update",
             data: {
                 filename: file,
                 status: status,

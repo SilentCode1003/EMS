@@ -43,7 +43,7 @@
             console.log(serial + " " + itemname + " " + datereceive + " " + itemtype);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/equipment/save",
+                url: "/equipment/save",
                 data: {
                     serial: serial,
                     itemname: itemname,
@@ -79,7 +79,7 @@
                     'scrollCollapse': true,
                     'serverMethod': 'POST',
                     'ajax': {
-                        'url': 'http://localhost:3000/equipment/searchFile',
+                        'url': '/equipment/searchFile',
                         'data': {
                             serial: serial
                         }
@@ -179,7 +179,7 @@
             console.log(file + " " + deployto + " " + datedeploy + " " + ticket + " " + personel);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/equipment/updateFile",
+                url: "/equipment/updateFile",
                 data: {
                     filename: file,
                     deployto: deployto,

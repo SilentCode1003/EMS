@@ -13,7 +13,7 @@
             console.log(storecode +" "+ storename +" "+ storeaddress +" "+ storeemail +" "+ storearea);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/establishment/save",
+                url: "/establishment/save",
                 data: {
                     storecode: storecode,
                     storename: storename,
@@ -36,7 +36,7 @@
             console.log(data);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/establishment/saveEquipmentInfo",
+                url: "/establishment/saveEquipmentInfo",
                 data: {
                     storename : selectedStore,
                     data: data

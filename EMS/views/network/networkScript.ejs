@@ -68,7 +68,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/networks/save",
+                url: "/networks/save",
                 data: {
                     itemname: itemname,
                     itemserial: itemserial,
@@ -116,7 +116,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/networks/updateFile",
+                url: "/networks/updateFile",
                 data: {
                     filename: file,
                     deployto: deployto,

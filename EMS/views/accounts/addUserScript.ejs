@@ -9,7 +9,7 @@
             console.log(username +" "+ password +" "+ fullname +" "+ accounttype);
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/accounts/save",
+                url: "/accounts/save",
                 data: {
                     username: username,
                     password: password,
