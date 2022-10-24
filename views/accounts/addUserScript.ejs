@@ -1,0 +1,37 @@
+<script>
+        $(document).ready(function() {
+            let dataArr = [];
+
+        $(document).on('click', "#registerBtn", function () {
+            var username = $('#itembarcode').val();
+            var password = $('#itemname').val();
+            var fullname = $('#itemprice').val();
+            var accounttype = $('#itemtype').val();
+
+            dataArr.push({
+                username: username,
+                password: password,
+                fullname: fullname,
+                accounttype: accounttype,
+            });
+
+            var data = JSON.stringify(dataArr);
+
+            console.log(username +" "+ password +" "+ fullname +" "+ accounttype);
+            $.ajax({
+                type: "POST",
+                url: "/accounts/save",
+                data: {
+                    fullname: fullname,
+                    data: data,
+                },
+                success: function (result) {
+                    alert("Data Saved!");
+                },
+                error: function (result) {
+                    alert('error: ' + result.data);
+                }
+            });
+        });
+    });
+</script>
