@@ -71,10 +71,10 @@ $(document).ready(function() {
                 patchcable: patchcable
             },
             success: function (result) {
-                alert(result.msg);
+                success("Saved","Data Saved!");
             },
             error: function (result) {
-                alert('error: '+ result.data);
+                error('error: '+ result.data);
             }
         });
     });
@@ -109,10 +109,10 @@ $(document).ready(function() {
                 personel: personel
             },
             success: function (result) {
-                alert("Data Saved!");
+                success("Saved","Data Saved!");
             },
             error: function (result) {
-                alert('error: '+ result.data);
+                error('error: '+ result.data);
             }
         });
     });

@@ -14,7 +14,7 @@ var parser = new xml2js.Parser();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('reports', { title: 'Equipment Monitoring System'});
+  res.render('reports', { title: 'Equipment Monitoring System', fullname: req.session.fullname});
 });
 
 module.exports = router;

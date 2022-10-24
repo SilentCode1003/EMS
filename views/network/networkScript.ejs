@@ -76,10 +76,10 @@
                     receivedby: receivedby
                 },
                 success: function (result) {
-                    alert("Data Saved!");
+                    success("Saved","Data Saved!");
                 },
                 error: function (result) {
-                    alert('error: ' + result.data);
+                    error('error: ' + result.data);
                 }
             });
 
@@ -128,10 +128,10 @@
                     ReloadDataTable();
                     $("#updateArea").toggle(0, function () {
                     });
-                    alert("Data Saved!");
+                    success("Saved","Data Saved!");
                 },
                 error: function (result) {
-                    alert('error: ' + result.data);
+                    error('error: ' + result.data);
                 }
             });
         });

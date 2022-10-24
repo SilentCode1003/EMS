@@ -15,7 +15,7 @@ var networks = __dirname + '/data/network/spare';
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('networks', { title: 'Equipment Monitoring System' });
+  res.render('networks', { title: 'Equipment Monitoring System' , fullname: req.session.fullname});
 });
 
 module.exports = router;

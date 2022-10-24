@@ -53,10 +53,10 @@ $(document).ready(function() {
                 siminside: simStatus
             },
             success: function (result) {
-                alert("Data Saved!");
+                success("Saved","Data Saved!");
             },
             error: function (result) {
-                alert('error: '+ result.data);
+                error('error: '+ result.data);
             }
         });
     });

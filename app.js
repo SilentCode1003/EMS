@@ -3,8 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var x2js = require('x2js');
-const { jsPDF } = require("jspdf");
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoDBSession = require('connect-mongodb-session')(session);
@@ -21,6 +19,7 @@ var NetworksPulloutRouter = require('./routes/NetworksPullout');
 var m2cashequipmentRouter = require('./routes/m2cashequipment');
 var m2cashservicereportRouter = require('./routes/servicereport');
 var m2cashstoresRouter = require('./routes/m2cashstores');
+var loginRouter = require('./routes/login');
 
 
 var app = express();
@@ -68,6 +67,7 @@ app.use('/NetworksPullout', NetworksPulloutRouter);
 app.use('/m2cashequipment', m2cashequipmentRouter)
 app.use('/servicereport', m2cashservicereportRouter);
 app.use('/m2cashstores', m2cashstoresRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

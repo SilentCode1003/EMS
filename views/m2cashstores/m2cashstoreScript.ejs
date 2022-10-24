@@ -50,10 +50,10 @@
                 area: area
             },
             success: function (result) {
-                alert(result.msg);
+                success("Saved","Data Saved!");
             },
             error: function (result) {
-                alert('error: ' + result.data);
+                error('error: ' + result.data);
             }
         });
     });

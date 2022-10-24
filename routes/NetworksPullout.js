@@ -27,7 +27,8 @@ router.get('/', function(req, res, next) {
     preparedBy: preparedBy,
     position: position,
     underscore: underscore,
-    reportTitle: reportTitle
+    reportTitle: reportTitle,
+    fullname: req.session.fullname
    });
 
   console.log({

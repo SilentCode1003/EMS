@@ -14,7 +14,7 @@ var targetPath = '/data/m2cash/equipment';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('m2cashequipment', { title: 'Equipment Monitoring System' });
+  res.render('m2cashequipment', { title: 'Equipment Monitoring System', fullname: req.session.fullname });
 });
 
 module.exports = router;

@@ -1,6 +1,30 @@
 <script>
-        $(document).ready(function() {
-            let dataArr = [];
+    $(document).ready(function () {
+        let dataArr = [];
+
+        var dataTable = $('#equipmentTbl').DataTable({
+            'destroy': true,
+            'processing': true,
+            'serverSide': true,
+            'paging': false,
+            'searching': false,
+            'info': false,
+            'scrollY': 200,
+            'scrollCollapse': true,
+            'serverMethod': 'GET',
+            'ajax': {
+                'url': '/accounts/LoadData',
+            },
+            'columns': [
+                { data: 'Username' },
+                { data: 'Password' },
+                { data: 'Fullname' },
+                { data: 'AccountType' }
+                // { data : null, title:'Action', wrap: false, "render": function(){
+                //         return '<button class="btn-glow" id="updateBtn" name="updateBtn">UPDATE</button>'
+                //         }}
+            ]
+        });
 
         $(document).on('click', "#registerBtn", function () {
             var username = $('#itembarcode').val();
@@ -17,7 +41,7 @@
 
             var data = JSON.stringify(dataArr);
 
-            console.log(username +" "+ password +" "+ fullname +" "+ accounttype);
+            console.log(username + " " + password + " " + fullname + " " + accounttype);
             $.ajax({
                 type: "POST",
                 url: "/accounts/save",
@@ -26,10 +50,10 @@
                     data: data,
                 },
                 success: function (result) {
-                    alert("Data Saved!");
+                    success("Saved", "Data Saved!");
                 },
                 error: function (result) {
-                    alert('error: ' + result.data);
+                    error('error: ' + result.data);
                 }
             });
         });

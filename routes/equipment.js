@@ -17,7 +17,7 @@ var EquipmentDirectoryDeploy = __dirname + '/data/equipments/deploy/';
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('equipment', { title: 'Equipment Monitoring System' });
+  res.render('equipment', { title: 'Equipment Monitoring System', fullname: req.session.fullname });
 });
 
 module.exports = router;

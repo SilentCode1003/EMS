@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
     oldserial: 'N/A',
     newserial: 'N/A',
     timein: '1230H',
-    timeout: '1245H'
+    timeout: '1245H',
+    fullname: req.session.fullname
    });
 });
 

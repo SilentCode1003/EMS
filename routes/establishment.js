@@ -18,7 +18,7 @@ var convert = require('xml-js');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('establishment', { title: 'Equipment Monitoring System' });
+  res.render('establishment', { title: 'Equipment Monitoring System' , fullname: req.session.fullname });
 });
 
 module.exports = router;
